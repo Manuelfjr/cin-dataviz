@@ -1,6 +1,6 @@
-# Template Hooks MIT
+#  Visualizing and analyzing sperm segmentation data to understand sperm behavior patterns
 
-This repository serves as a template for future projects on GitHub, providing a basic structure for implementing pre-commit hooks, flake8, and other functionalities to be developed in the future.
+Esse repositorio tem como foco o estudo da segmentação do comportamento de espermatozoides e entedimento de padrões.
 
 ## How to use this template
 
@@ -19,7 +19,7 @@ The project follows the following structure:
 ## Contact
 
 Here you can find my contact information:
-
+<!-- 
 <div align="center">
     <a href="https://github.com/Manuelfjr/template-hooks-mit">
         <img src="https://avatars.githubusercontent.com/u/53409857?v=4" alt="Profile Image" width="200" height="200" style="border-radius: 50%;">
@@ -36,4 +36,4 @@ Here you can find my contact information:
 [<img src="https://img.icons8.com/ios/30/000000/linkedin.png"/>](https://www.linkedin.com/in/manuefjr/)
 [<img src="https://img.icons8.com/ios/30/000000/email.png"/>](mailto:ferreira.jr.ufpb@gmail.com)
 
-</div>
+</div> -->
