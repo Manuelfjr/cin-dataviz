@@ -1,0 +1,5 @@
+train: C:/Users/ccana/Documents/Doutorado/VIS1170/cin-dataviz/datasets/data/train
+val: C:/Users/ccana/Documents/Doutorado/VIS1170/cin-dataviz/datasets/data/valid/images
+
+nc: 3
+names: ['sperm','cluster','pinhead']
