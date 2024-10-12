@@ -66,7 +66,11 @@ keras: false
 optimize: false
 int8: false
 dynamic: false
+<<<<<<< HEAD
 simplify: false
+=======
+simplify: true
+>>>>>>> bb0aa79bb81e6045b1e3a1902f82ec4a7c2fe059
 opset: null
 workspace: 4
 nms: false
@@ -103,4 +107,8 @@ erasing: 0.4
 crop_fraction: 1.0
 cfg: null
 tracker: botsort.yaml
+<<<<<<< HEAD
 save_dir: runs\detect\train12
+=======
+save_dir: runs/detect/train12
+>>>>>>> bb0aa79bb81e6045b1e3a1902f82ec4a7c2fe059
