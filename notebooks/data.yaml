@@ -1,5 +1,26 @@
-train: /home/manuel/projects/repos/cin-dataviz/datasets/data/train
-val: /home/manuel/projects/repos/cin-dataviz/datasets/data/valid/images
+# Adicionar as pastas de treinamento no diretório para treinar o modelo
+train:
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/11
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/12
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/13
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/14
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/15
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/19
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/21
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/22
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/23
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/24
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/29
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/30
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/35
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/47
+
+
+val:
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/52
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/54
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/60
+  - /home/manuel/projects/repos/cin-dataviz/datasets/data/train/82
 
 nc: 3
 names: ['sperm','cluster','pinhead']
