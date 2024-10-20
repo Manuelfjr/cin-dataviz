@@ -11,6 +11,8 @@ main_*.py
 # Ingnoring infos in local folder
 conf/local/*
 !conf/local/.placeholder
+data/03_primary/tracker_video/*.mp4
+data/03_primary/tracker_data/*.csv
 
 # Exclude extras
 *.lock
