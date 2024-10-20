@@ -66,5 +66,5 @@ class VideoProcessor:
                 }
             )
             if self.save_paths:
-                self.data_tracker[source_name].to_csv(self.save_paths[idx], index=False)
+                self.data_tracker[source_name].to_parquet(self.save_paths[idx], index=False)
         return self.data_tracker
