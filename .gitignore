@@ -13,6 +13,7 @@ conf/local/*
 !conf/local/.placeholder
 data/03_primary/tracker_video/*.mp4
 data/03_primary/tracker_data/*.csv
+datasets/*
 
 # Exclude extras
 *.lock
