@@ -2,9 +2,20 @@
 
 Esse repositorio tem como foco o estudo da segmentação do comportamento de espermatozoides e entedimento de padrões.
 
-## How to use this template
+## How to run
 
-1. Create a new repository on GitHub using this repository as a template.
+1. Rodar notebooks em sequencia:
+
+    1.0 Adicionar videos no diretorio [/datasets/train](/datasets/train)
+
+    1.1 Executar [00_01_sperkm_tracking.ipynb](/notebooks/00_01_sperkm_tracking.ipynb)
+
+    1.2 Executar [01_00_pre_process_horm.ipynb](/notebooks/01_00_pre_process_horm.ipynb)
+
+    1.3 Executar [01_01_pre_process_track.ipynb](/notebooks/01_01_pre_process_track.ipynb)
+
+    1.4 Executar [01_02_pre_process_join.ipynb](/notebooks/01_02_pre_process_join.ipynb)
+    
 2. Clone the new repository to your local environment.
 3. Customize the template according to your project's needs.
 4. Implement the desired pre-commit hooks and other functionalities.
