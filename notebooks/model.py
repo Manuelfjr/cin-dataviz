@@ -11,24 +11,24 @@ from ultralytics import YOLO
 ultralytics.checks()
 
 
-path_data = PROJECT_DIR / 'data'
+path_data = PROJECT_DIR / "data"
 path_intermediate = path_data / "02_intermediate"
 
-file_path_tracker = path_intermediate / 'tracker_all.csv'
+file_path_tracker = path_intermediate / "tracker_all.csv"
 
 
 # Load a model
-model = YOLO('yolov8s.yaml')  # build a new model from scratch
-model = YOLO('yolov8s.pt')  # load a pretrained model (recommended for training)
+model = YOLO("yolov8s.yaml")  # build a new model from scratch
+model = YOLO("yolov8s.pt")  # load a pretrained model (recommended for training)
 
 # Use the model
-results = model.train(data='data.yaml', epochs=3)  # train the model
+results = model.train(data="data.yaml", epochs=3)  # train the model
 results = model.val()  # evaluate model performance on the validation set
 
 
 
 # Inicializando o modelo, o rastreador e os anotadores
-model = YOLO('runs/detect/train/weights/best.pt')
+model = YOLO("runs/detect/train/weights/best.pt")
 tracker = sv.ByteTrack()
 annotator = sv.RoundBoxAnnotator()
 label_annotator = sv.LabelAnnotator()
