@@ -17,7 +17,7 @@ Esse repositorio tem como foco o estudo da segmentação do comportamento de esp
     1.4 Executar [01_02_pre_process_join.ipynb](/notebooks/01_02_pre_process_join.ipynb)
     
 2. Clone the new repository to your local environment.
-3. Customize the template according to your project's needs.
+3. Customize the template according to your project"s needs.
 4. Implement the desired pre-commit hooks and other functionalities.
 5. Start developing your project with the pre-configured settings and functionalities.
 

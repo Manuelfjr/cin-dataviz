@@ -1,0 +1,13 @@
+{
+    
+    "centerX": 300,
+    "centerY": 300,
+    "radii": {
+        "outer": 200,
+        "middle": 150,
+        "inner": 100
+    },
+    "lineLength": 150,
+    "circlesCount": 3,
+    "circleRadius": 12
+}

@@ -3,7 +3,7 @@ repos:
     rev: 23.3.0
     hooks:
       - id: black
-        files: '\.ipynb$|\.py$'
+        files: "\.ipynb$|\.py$"
 
   - repo: https://github.com/PyCQA/flake8
     rev: 6.0.0
@@ -26,15 +26,15 @@ repos:
     hooks:
       - id: nbqa-pyupgrade
         additional_dependencies: [pyupgrade==2.7.3]
-        files: '\.ipynb$'
+        files: "\.ipynb$"
 
       - id: nbqa-isort
         additional_dependencies: [isort==5.6.4]
-        files: '\.ipynb$'
+        files: "\.ipynb$"
 
       - id: nbqa-flake8
         additional_dependencies: [flake8==6.0.0]
-        files: '\.ipynb$'
+        files: "\.ipynb$"
         args: ["--ignore=E402"]
 
 # - repo: https://github.com/pre-commit/mirrors-pylint

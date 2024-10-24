@@ -24,8 +24,8 @@ def read_file_yaml(path: str) -> dict:
 
     Examples:
     ---------
-    >>> read_file_yaml('/path/to/file.yaml')
-    {'key1': 'value1', 'key2': 'value2'}
+    >>> read_file_yaml("/path/to/file.yaml")
+    {"key1": "value1", "key2": "value2"}
     """
     with open(path, "r") as file:
         data = yaml.safe_load(file)
@@ -49,8 +49,8 @@ def save_file_yaml(data: dict, path: str) -> None:
 
     Examples:
     ---------
-    >>> data = {'key1': 'value1', 'key2': 'value2'}
-    >>> save_file_yaml('/path/to/file.yaml', data)
+    >>> data = {"key1": "value1", "key2": "value2"}
+    >>> save_file_yaml("/path/to/file.yaml", data)
     """
     with open(path, "w") as file:
         yaml.dump(data, file)

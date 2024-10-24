@@ -8,7 +8,7 @@ def set_root(level: int = 1) -> Path:
     Parameters:
     -----------
     level : int, optional
-        The number of parent directories to go up from the current file's directory.
+        The number of parent directories to go up from the current file"s directory.
         Default is 1, which means the immediate parent directory.
 
     Returns:
@@ -19,10 +19,10 @@ def set_root(level: int = 1) -> Path:
     Examples:
     ---------
     >>> set_root()
-    PosixPath('/user/dir/path/root/project-path')
+    PosixPath("/user/dir/path/root/project-path")
 
     >>> set_root(2)
-    PosixPath('/user/dir/path/root')
+    PosixPath("/user/dir/path/root")
 
     """
     for i in range(level):
