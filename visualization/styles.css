@@ -59,9 +59,11 @@ select:focus {
     margin: 20px 0;
 }
 
-video {
-    max-width: 70%; /* Largura do vídeo */
+
+video{
+    max-width: 50%; /* Largura do vídeo */
     border-radius: 8px;
+    
 }
 
 .tracker {
