@@ -1,13 +1,62 @@
 {
-    
-    "centerX": 300,
-    "centerY": 300,
-    "radii": {
-        "outer": 200,
-        "middle": 150,
-        "inner": 100
+  "individuos": [
+    {
+      "id": 1,
+      "espermatozoides": [
+        {
+          "id": 1,
+          "VCL": 2.1,
+          "VSL": 0.76,
+          "VAP": 1.8,
+          "ALH": 0.4,
+          "MAD": 15
+        },
+        {
+          "id": 2,
+          "VCL": 2.5,
+          "VSL": 0.82,
+          "VAP": 1.9,
+          "ALH": 0.3,
+          "MAD": 12
+        },
+        {
+          "id": 3,
+          "VCL": 1.9,
+          "VSL": 0.65,
+          "VAP": 1.5,
+          "ALH": 0.35,
+          "MAD": 18
+        }
+      ]
     },
-    "lineLength": 150,
-    "circlesCount": 3,
-    "circleRadius": 12
+    {
+      "id": 2,
+      "espermatozoides": [
+        {
+          "id": 1,
+          "VCL": 2.3,
+          "VSL": 0.78,
+          "VAP": 1.85,
+          "ALH": 0.39,
+          "MAD": 14
+        },
+        {
+          "id": 2,
+          "VCL": 2.1,
+          "VSL": 0.69,
+          "VAP": 1.7,
+          "ALH": 0.34,
+          "MAD": 13
+        },
+        {
+          "id": 3,
+          "VCL": 2.2,
+          "VSL": 0.88,
+          "VAP": 1.95,
+          "ALH": 0.42,
+          "MAD": 16
+        }
+      ]
+    }
+  ]
 }

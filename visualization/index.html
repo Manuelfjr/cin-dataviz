@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JavaScript module example</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- no pop no style, us strictly roots -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <script type="module" src="main.js"></script>
+    <div class="container">
+        <h1>Exploração de Dados Espermáticos e Bioquímicos para Apoio à Fertilidade Masculina</h1>
+        <p>Ana Carla de Carvalho Correia, Manuel Ferreira Junior e Thifany Ketuli Silva de Souza</p>
+        <div class="dropdown">
+            <label for="individuos">Escolha uma opção:</label>
+            <select id="individuos"></select>
+        </div>
+
+        <div class="video-container">
+            <video controls id="video"></video>
+            <div class="tracker"></div>
+        </div>
+
+        <div class="glifo">
+            <svg></svg>
+        </div>
+
+        <div id="coord"></div>
+    </div>
+
+</html>

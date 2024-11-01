@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+p {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+}
+
+.dropdown {
+    margin-bottom: 20px;
+}
+
+.dropdown label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+select:focus {
+    border-color: #8e8a8a;
+    outline: none;
+}
+
+.video-container {
+    display: flex; /* Usando flexbox */
+    align-items: center; /* Alinha verticalmente */
+    margin: 20px 0;
+}
+
+video {
+    max-width: 70%; /* Largura do vídeo */
+    border-radius: 8px;
+}
+
+.tracker {
+    margin-left: 20px; /* Espaçamento entre vídeo e tracker */
+    font-size: 18px;
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+.coordenadas {
+    margin-top: 15px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.glifo {
+    text-align: center;
+    margin-top: 20px;
+}
+
