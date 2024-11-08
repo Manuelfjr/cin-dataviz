@@ -1,4 +1,4 @@
-import { glyph } from './glyph.js';
+import { glyph_by_frame } from './glyph_tracker.js';
 import playVideo from './video.js';
 import { coords } from './coord.js';
 
@@ -21,7 +21,7 @@ function atualizarVisualizacao(id) {
 
     if (individuo) {
         // Atualiza o gráfico com os dados do indivíduo selecionado
-        glyph(individuo.espermatozoides);
+        glyph_by_frame(individuo.espermatozoides);
         playVideo();
         coords(dados);
     }

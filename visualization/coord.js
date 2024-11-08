@@ -1,6 +1,6 @@
 export function coords(dados) {
     // Extrair valores para cada variável
-    console.log(dados)
+    //console.log(dados)
     // Extrair valores para cada variável
     const variavel1 = dados.map(d => d.Variavel1);
     const variavel2 = dados.map(d => d.Variavel2);
