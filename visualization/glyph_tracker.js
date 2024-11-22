@@ -21,15 +21,16 @@ export function glyph_by_frame(espermatozoides) {
         draw_route(g, d, i);
         for (var i = 0; i < d.frames.length; i++) {
             g.append("g")
-                .attr("class", "glifos");
+                .attr("class", "glifo");
 
         }
-        let glifo = d3.select(this).selectAll(".glifos");
+        let glifo = d3.select(this).selectAll(".glifo");
 
         glifo.each(function (d, i) {
 
             rotate_glyph(d3.select(this), d.frames, i);
-            draw_glyph(d3.select(this), d.frames[i])
+            draw_glyph(d3.select(this), d.frames[i]);
+            tooltip_glyph(d3.select(this), d.frames[i]);
         });
     });
 
@@ -73,7 +74,6 @@ export function rotate_glyph(g, frames, i) {
     }
     g.attr("transform", `rotate(${angle}, ${centerX}, ${centerY})`);
 }
-
 export function draw_glyph(g, d) {
     const centerX = d.x;
     const centerY = d.y;
@@ -226,6 +226,52 @@ export function draw_glyph(g, d) {
         .attr('y', centerY + 25)
         .attr('text-anchor', 'middle');*/
 
+}
+export function tooltip_glyph(g, d) {
+    // Cria um tooltip na body ou em outro contêiner
+    var Tooltip = d3.select("body")  // Pode mudar para outro contêiner, se necessário
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white") 
+        .style("color", "black")
+        .style("border-radius", "8px") 
+        .style("padding", "8px 12px") 
+        .style("font-size", "12px") 
+        .style("box-shadow", "0 2px 6px rgba(0, 0, 0, 0.2)") 
+        .style("position", "absolute")  // Necessário para o posicionamento absoluto
+        .style("pointer-events", "none")  // Impede que o tooltip interfira com os eventos do mouse
+        .style("transition", "opacity 0.2s ease-in-out");  // Suaviza a transição de visibilidade
 
 
+    // Função para mostrar o tooltip quando o mouse passar sobre o item
+    var mouseover = function () {
+        Tooltip
+            .style("opacity", 1);  // Torna o tooltip visível
+        d3.select(this)
+            .style("stroke", "black")
+            .style("background-color", "red");  // Altera a opacidade do glifo
+    }
+
+    // Função para mover o tooltip conforme o mouse se move
+    var mousemove = function (event) {
+        Tooltip
+            .html("VCL: " + d.VCL + "<br>VSL: " + d.VSL + "<br>VAP: " + d.VAP + "<br>ALH: " + d.ALH + "<br>MAD: " + d.MAD)
+            .style("left", (event.pageX + 20) + "px")  // Calcula a posição horizontal
+            .style("top", (event.pageY ) + "px");  // Calcula a posição vertical
+    }
+
+    // Função para esconder o tooltip quando o mouse sai do item
+    var mouseleave = function () {
+        Tooltip
+            .style("opacity", 0);  // Torna o tooltip invisível
+        d3.select(this)
+            .style("stroke", "none")
+            .style("opacity", 1);  // Restaura a opacidade do glifo
+    }
+
+    // Adiciona os eventos de mouse sobre o glifo
+    g.on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave);
 }
