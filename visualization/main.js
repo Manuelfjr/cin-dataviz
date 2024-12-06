@@ -6,13 +6,8 @@ import { coords } from './coord.js';
 
 // Carrega os dados do JSON
 let variaveis = await d3.json("data.json");
-const dados = [
-    { Variavel1: 1, Variavel2: 2, Variavel3: 3 },
-    { Variavel1: 2, Variavel2: 1, Variavel3: 2 },
-    { Variavel1: 3, Variavel2: 5, Variavel3: 3 },
-    { Variavel1: 4, Variavel2: 2, Variavel3: 1 },
-    { Variavel1: 5, Variavel2: 3, Variavel3: 4 }
-];
+
+let dados = await d3.csv("data_horm_concat_corr.csv");
 
 // Função para atualizar a visualização com base no ID do indivíduo
 function atualizarVisualizacao(id) {
@@ -23,7 +18,7 @@ function atualizarVisualizacao(id) {
         // Atualiza o gráfico com os dados do indivíduo selecionado
         glyph_by_frame(individuo.espermatozoides);
         playVideo();
-        coords(dados);
+        coords(dados, id);
     }
 
 }

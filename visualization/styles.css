@@ -2,84 +2,196 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    /*border: 2px solid red;*/
+
 }
 
+/* Estilo para o corpo da página */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     color: #333;
     padding: 20px;
+    background-color: #f4f4f4;
+    /* Cor de fundo mais suave */
 }
 
-.container {
-    max-width: 900px;
-    margin: auto;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
 
+/* Estilo do título */
 h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #2c3e50;
+    font-size: 24px;
 }
+
+/* Estilo para o parágrafo com os autores */
 p {
     text-align: center;
-    margin-bottom: 40px;
-    color: #2c3e50;
-}
-
-.dropdown {
     margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 16px;
 }
 
+/* Estilo do dropdown de seleção */
+.dropdown {
+    margin-bottom: 10px;
+    width: 100%;
+    /* Faz com que ocupe toda a largura disponível */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para o rótulo do dropdown */
 .dropdown label {
     font-weight: bold;
     margin-right: 10px;
 }
 
+/* Estilo do select */
 select {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
     transition: border-color 0.3s;
+    width: 200px;
+    /* Tamanho do dropdown */
 }
 
+/* Estilo quando o select está em foco */
 select:focus {
     border-color: #8e8a8a;
     outline: none;
 }
 
-.video-container {
-    display: flex; /* Usando flexbox */
-    align-items: center; /* Alinha verticalmente */
-    margin: 20px 0;
-}
 
-
-video{
-    max-width: 50%; /* Largura do vídeo */
+/* Container geral com conteúdo centralizado */
+.container {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
     border-radius: 8px;
-    
+    min-height: 200px;
+    background-color: #ffffff;
+
 }
 
-.tracker {
-    margin-left: 20px; /* Espaçamento entre vídeo e tracker */
-    font-size: 18px;
-    text-align: left; /* Alinha o texto à esquerda */
+.explication {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
 }
 
-.coordenadas {
-    margin-top: 15px;
-    font-size: 18px;
+.button_exp {
+    border: none;
+    margin-left: 10px;
+    background-color: rgb(136, 137, 136);
+    border-radius: 4px;
+    width: 300px;
+    height: 20px;
+    color: rgb(206, 207, 206);
+}
+.img_exp{
+    padding-top: 20px;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.container2 {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: calc(23.333% - 20px);
+    gap: 10px;
+    /* Espaçamento entre as divs */
+
+}
+
+/* Estilo para os glifos com borda */
+.glifos {
+    display: flex;
+    flex-grow: 1;
+    /* Pode crescer para preencher o espaço */
+    flex-shrink: 1;
+    /* Pode encolher se necessário */
+    flex-basis: calc(53.333% - 320px);
     text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Estilo para o elemento video */
+video {
+    display: flex;
+    width: 100%;
+    /* Faz o vídeo ocupar toda a largura do container */
+    height: auto;
+    border-radius: 8px;
 }
 
 .glifo {
-    text-align: center;
-    margin-top: 20px;
+    padding: 20px;
+    background-color: red;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 100%;
+    box-sizing: border-box;
 }
 
+#coord {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    /* Borda mais suave */
+    flex: 1 1 calc(100% - 20px);
+    /* Responsivo: 3 por linha */
+
+    justify-content: center;
+    align-items: center;
+}
+
+#coord svg {
+    /* Borda mais suave */
+    border-radius: 8px;
+}
+
+
+
+
+
+
+
+/* Adicional: Melhorando a responsividade do layout */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+        flex-direction: column;
+        /* Organiza o layout de forma empilhada em telas pequenas */
+        align-items: stretch;
+    }
+
+    .video-container,
+    .coordenadas {
+        width: 100%;
+        /* As divs ocupam 100% da largura em dispositivos móveis */
+    }
+
+    video {
+        max-width: 100%;
+        /* Ajusta o vídeo para ocupar toda a largura em telas pequenas */
+        margin-right: 10px;
+    }
+
+    .video-info {
+        width: 100%;
+        /* A div à direita também ocupa 100% em telas pequenas */
+    }
+
+    .dropdown select {
+        width: 100%;
+        /* O dropdown ocupa toda a largura da tela em dispositivos móveis */
+    }
+}

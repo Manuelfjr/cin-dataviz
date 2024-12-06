@@ -1,11 +1,11 @@
 export function glyph_by_frame(espermatozoides) {
     d3.selectAll("g").remove();
-    let container = document.querySelector('.container');
+    let container = document.querySelector('.glifos');
     let larguraTela = container.clientWidth;
-    let altura = 700;
+    let altura = 600;
     // Configura a dimensão do SVG
     let svg = d3.select("svg")
-        .attr('width', larguraTela)
+        .attr('width', larguraTela*0.9)
         .attr('height', altura);
 
     svg.selectAll(".espermatozoide")
@@ -248,9 +248,6 @@ export function tooltip_glyph(g, d) {
     var mouseover = function () {
         Tooltip
             .style("opacity", 1);  // Torna o tooltip visível
-        d3.select(this)
-            .style("stroke", "black")
-            .style("background-color", "red");  // Altera a opacidade do glifo
     }
 
     // Função para mover o tooltip conforme o mouse se move
@@ -265,9 +262,6 @@ export function tooltip_glyph(g, d) {
     var mouseleave = function () {
         Tooltip
             .style("opacity", 0);  // Torna o tooltip invisível
-        d3.select(this)
-            .style("stroke", "none")
-            .style("opacity", 1);  // Restaura a opacidade do glifo
     }
 
     // Adiciona os eventos de mouse sobre o glifo

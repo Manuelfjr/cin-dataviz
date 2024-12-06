@@ -1,37 +1,56 @@
-export function coords(dados) {
+export function coords(dados, individuo) {
     // Extrair valores para cada variável
-    //console.log(dados)
-    // Extrair valores para cada variável
-    const variavel1 = dados.map(d => d.Variavel1);
-    const variavel2 = dados.map(d => d.Variavel2);
-    const variavel3 = dados.map(d => d.Variavel3);
+    const id = dados.map(d => d['ID']);
+    const spermC17_0 = dados.map(d => parseFloat(d['Sperm C17:0']));
+    const totalSpermCount = dados.map(d => parseFloat(d['Total sperm count']));
+    const spermC24_0 = dados.map(d => parseFloat(d['Sperm C24:0']));
+    const spermC18_1_trans = dados.map(d => parseFloat(d['Sperm C18:1 trans']));
+    const spermC16_1_n7 = dados.map(d => parseFloat(d['Sperm C16:1 n-7']));
+    const spermC18_3_n3 = dados.map(d => parseFloat(d['Sperm C18:3 n-3']));
+    const spermC18_1_n9 = dados.map(d => parseFloat(d['Sperm C18:1 n-9']));
+    const spermC16_0 = dados.map(d => parseFloat(d['Sperm C16:0']));
+    const spermC20_1_n9 = dados.map(d => parseFloat(d['Sperm C20:1 n-9']));
+    const spermC22_6_n3 = dados.map(d => parseFloat(d['Sperm C22:6 n-3']));
+    const age = dados.map(d => parseFloat(d['Age']));
+    const bmi = dados.map(d => parseFloat(d['BMI']));
+    const spermVitality = dados.map(d => parseFloat(d['Sperm vitality']));
 
+    // Criar uma lista de cores, onde todas as linhas têm cor 0, exceto a linha do "individuo"
+    const colors = id.map(val => (val == individuo ? 1 : 0)); // 1 para a linha selecionada, 0 para as outras
+
+    // Criar uma escala de cores para usar cinza e vermelho
+    const colorScale = [[0, 'rgb(150,150,150)'], [1, 'rgb(255,0,0)']];
+
+    // Criar o trace (dados) do gráfico
     const trace = {
         type: 'parcoords',
         line: {
-            color: variavel1, // Cor das linhas com base em Variavel1
-            colorscale: 'Viridis', // Mapa de cores
-            showscale: true
+            color: colors, // Usando a lista de cores (1 para vermelho, 0 para cinza)
+            colorscale: colorScale, // Define a escala de cores personalizada
+            showscale: false // Mostrar escala de cores
         },
         dimensions: [
-            {
-                label: 'Variável 1',
-                values: variavel1
-            },
-            {
-                label: 'Variável 2',
-                values: variavel2
-            },
-            {
-                label: 'Variável 3',
-                values: variavel3
-            }
+            { label: 'ID', values: id, hoverinfo:'label + values'},
+            { label: 'Sperm C17:0', values: spermC17_0 },
+            { label: 'Total sperm count', values: totalSpermCount },
+            { label: 'Sperm C24:0', values: spermC24_0 },
+            { label: 'Sperm C18:1 trans', values: spermC18_1_trans },
+            { label: 'Sperm C16:1 n-7', values: spermC16_1_n7 },
+            { label: 'Sperm C18:3 n-3', values: spermC18_3_n3 },
+            { label: 'Sperm C18:1 n-9', values: spermC18_1_n9 },
+            { label: 'Sperm C16:0', values: spermC16_0 },
+            { label: 'Sperm C20:1 n-9', values: spermC20_1_n9 },
+            { label: 'Sperm C22:6 n-3', values: spermC22_6_n3 },
+            { label: 'Age', values: age },
+            { label: 'BMI', values: bmi },
+            { label: 'Sperm vitality', values: spermVitality }
         ]
     };
 
+    // Layout do gráfico
     const layout = {
         title: 'Gráfico de Coordenadas Paralelas',
-        height: 400
+        height: 600 // Ajuste da altura para o gráfico
     };
 
     // Renderizar o gráfico

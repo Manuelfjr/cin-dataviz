@@ -12,24 +12,48 @@
 
 <body>
     <script type="module" src="main.js"></script>
-    <div class="container">
+    <div>
         <h1>Exploração de Dados Espermáticos e Bioquímicos para Apoio à Fertilidade Masculina</h1>
         <p>Ana Carla de Carvalho Correia, Manuel Ferreira Junior e Thifany Ketuli Silva de Souza</p>
         <div class="dropdown">
             <label for="individuos">Escolha um indivíduo:</label>
             <select id="individuos"></select>
         </div>
+    </div>
 
-        <div class="video-container">
-            <video controls id="video"></video>
-            <div class="tracker"></div>
+
+    <button onclick="toggleFirstDiv()" class = "button_exp">Sobre os glifos</button>
+    <div class="container">
+
+        <div id="toggleDiv" class="explication">
+            <img class="img_exp" src= "Metrics.png">
+            <img class="img_exp" src= "glifo.png">
         </div>
 
         <div class="glifos">
             <svg></svg>
         </div>
-
+        <div class="container2">
+            <div>
+                <video controls id="video"></video>
+            </div>
+            <div class="glifo">Div 4</div>
+        </div>
         <div id="coord"></div>
     </div>
+    <script>
+        function toggleFirstDiv() {
+            const firstDiv = document.getElementById('toggleDiv');
+            const showButton = firstDiv.querySelector('.show-button');
+
+            if (firstDiv.style.display === 'none') {
+                firstDiv.style.display = 'block'; // Mostrar a primeira div
+                showButton.style.display = 'none'; // Esconder a mensagem de exibir
+            } else {
+                firstDiv.style.display = 'none'; // Esconder a primeira div
+                showButton.style.display = 'inline'; // Mostrar a mensagem de exibir
+            }
+        }
+    </script>
 
 </html>
