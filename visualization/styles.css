@@ -1,3 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+#titulo{
+    display: flex;
+    background-color: #1a1a2e;
+    align-items: center;
+    border-radius: 0 0 8px 8px;
+
+}
+.custom-header {
+    background-color: #ddd; /* Cor do fundo do topo */
+    font-family: 'Roboto', sans-serif;
+    color: #7f7c7c; /* Cor do texto */
+    font-size: 0.8em;
+    border-radius: 8px 8px 0 0;
+    text-align: center; /* Centraliza o texto */
+    padding: 5px 5px;
+}
+#menu-text {
+    color: #e9ecef;
+    font-size: 16px;
+    padding-left: 20px;
+    font-family: 'Roboto', sans-serif;
+    margin-right: auto; /* Move o texto para a esquerda */
+}
 #menuSuperior {
     display: flex;
     justify-content: flex-end;
@@ -5,6 +30,7 @@
     background-color: #1a1a2e;
     /* Cor de fundo elegante */
     padding: 0px 0px;
+    border-radius: 0 0 8px 8px;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -17,9 +43,9 @@
     text-decoration: none;
     margin: 0 10px;
     padding: 10px 20px;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 0 0 8px 8px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -54,7 +80,7 @@
 
 /* Estilo para o corpo da página */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: #333;
     padding: 0 20px 20px 20px;
     background-color: #f4f4f4;
@@ -118,7 +144,9 @@ select:focus {
     display: flex;
     gap: 10px;
     padding: 20px;
+    margin: 20px auto;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     min-height: 200px;
     background-color: #ffffff;
 
@@ -177,14 +205,13 @@ video {
 }
 
 .glifo_metric {
-    padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     height: 100%;
     box-sizing: border-box;
 }
 
-#coord {
+.coord {
     border: 1px solid #ddd;
     border-radius: 8px;
     /* Borda mais suave */

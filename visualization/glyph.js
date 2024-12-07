@@ -6,12 +6,12 @@ export function glyph(esp_metrics) {
     let largura = div_glifos.clientWidth;
     let altura = div_glifos.clientHeight;
 
-    let g = d3.selectAll(".glifo_metric").append("svg").attr("id","svg_glyph_metric" ).attr("width", largura).attr("height", altura);
+    let g = d3.selectAll(".glifo_metric").append("svg").attr("id", "svg_glyph_metric").attr("width", largura).attr("height", altura);
 
-    g.html("Espermatozóide: ");
-            
-    const centerX = largura/2;
-    const centerY = altura/2 - 100;
+    let t = d3.select(".glifo_metric").select(".custom-header").html("Sumarização do espermatozóide #" + esp_metrics.tracker_id);
+    console.log(t);
+    const centerX = largura / 2;
+    const centerY = 100;
 
     const radii = {
         outer: 60,
@@ -36,7 +36,7 @@ export function glyph(esp_metrics) {
             .attr("stroke-width", strokeWidth)
             .attr("transform", d => `translate(${centerX}, ${centerY})`);
     }
-    
+
     let colorScale = d3.scaleSequential()
         .domain([0, 1])
         .interpolator(d3.interpolateRainbow);
@@ -152,4 +152,36 @@ export function glyph(esp_metrics) {
     drawLine(150, "rgba(170, 170, 170)");
     drawLine(120, "rgba(170, 170, 170)");
     drawLine(210, "rgba(170, 170, 170)");
+
+    g.append("text")
+        .attr("x", centerX)                    // Posição X do texto (horizontal)
+        .attr("y", 200)                        // Posição Y inicial do texto (vertical)
+        .attr("font-size", "16px")             // Tamanho da fonte
+        .attr("fill", "black")                 // Cor do texto
+        .attr("text-anchor", "middle")         // Alinha horizontalmente no centro
+        .attr("dominant-baseline", "middle")   // Alinha verticalmente no centro
+        .append("tspan")
+        .attr("x", centerX)
+        .attr("dy", "1.2em")                  // Desloca a primeira linha
+        .text("VCL: " + esp_metrics.VCL)       // Primeira linha
+
+        .append("tspan")
+        .attr("x", centerX)
+        .attr("dy", "1.2em")                  // Desloca a segunda linha
+        .text("VSL: " + esp_metrics.VSL)      // Segunda linha
+
+        .append("tspan")
+        .attr("x", centerX)
+        .attr("dy", "1.2em")                  // Desloca a terceira linha
+        .text("VAP: " + esp_metrics.VAP)      // Terceira linha
+
+        .append("tspan")
+        .attr("x", centerX)
+        .attr("dy", "1.2em")                  // Desloca a quarta linha
+        .text("ALH: " + esp_metrics.ALH)      // Quarta linha
+
+        .append("tspan")
+        .attr("x", centerX)
+        .attr("dy", "1.2em")                  // Desloca a quinta linha
+        .text("MAD: " + esp_metrics.MAD);     // Quinta linha
 }

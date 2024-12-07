@@ -11,22 +11,76 @@
 
 <body>
     <!-- Menu Superior -->
-    <div id="menuSuperior">
-        <a href="index.html" class="active">Visualização</a>
-        <a href="explication.html">Explicação</a>
-        <a href="#desafios">Desafios</a>
-    </div>
+    <script src="menu.js"></script>
     <script type="module" src="main.js"></script>
-    <div>
-        <div class="dropdown">
-            <label for="individuos">Escolha um indivíduo:</label>
-            <select id="individuos"></select>
-        </div>
-    </div>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
-    <div class="container">
+        .explication {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background-color: white;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(136, 132, 132, 0.1);
+            line-height: 1.6;
+        }
 
-       
+        /* Estilo para o título */
+        .explication h2 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            text-align: left;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        /* Estilo para os parágrafos */
+        .explication p {
+            text-align: left;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        /* Estilo para as palavras destacadas */
+        .explication strong {
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        /* Ajuste para o container */
+        .explication p:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+    <div class="explication">
+        <h2>Métricas utilizadas na elaboração dos Glifos</h2>
+        <img src="imgs\Metrics.png">
+        <p>
+            A Figura 3 ilustra as principais medidas cinemáticas observáveis do movimento da cabeça de um
+            espermatozoide, como
+            <strong>VCL</strong> (velocidade curvilínea), <strong>VSL</strong> (velocidade linear) e
+            <strong>VAP</strong> (velocidade média no percurso).
+            Esses parâmetros são fundamentais para analisar os padrões de deslocamento e a progressão dos
+            espermatozoides.
+        </p>
+        <img src="imgs\glifo.png">
+        <p>
+            Já a Figura 5 apresenta o design do glifo desenvolvido para resumir os 20 parâmetros utilizados na análise
+            de movimento e morfologia dos espermatozoides.
+            Esse design utiliza canais visuais independentes para representar os dados de forma compacta e intuitiva,
+            permitindo que cientistas observem tanto
+            o movimento espacial quanto as mudanças temporais em uma única visualização.
+        </p>
+        <p>
+            O glifo combina informações cinemáticas da cabeça, como velocidades e deslocamentos, com medidas mecânicas
+            da flagela, como assimetria e torque, além de
+            incertezas associadas à análise de imagem. Essa abordagem facilita a comparação entre diferentes células e
+            fornece uma visão abrangente das suas características
+            multivariadas em um contexto espaço-temporal.
+        </p>
     </div>
 
 </html>

@@ -11,11 +11,7 @@
 
 <body>
     <!-- Menu Superior -->
-    <div id="menuSuperior">
-        <a href="index.html">Visualização</a>
-        <a href="explication.html">Explicação</a>
-        <a href="#desafios">Desafios</a>
-    </div>
+    <script src="menu.js"></script>
     <script type="module" src="main.js"></script>
 
 
@@ -28,14 +24,20 @@
             <div>
                 <video controls id="video"></video>
             </div>
-            <div class="glifo_metric">Div 4</div>
+            <div class="glifo_metric">
+                <div class="custom-header">Sumarização do espermatozóide</div>
+            </div>
         </div>
         <div class="container3">
             <div class="glifos">
+                <div class="custom-header">Sumarização das trajetórias dos espermatozóides por indivíduo</div>
                 <svg></svg>
             </div>
+            <div class="coord">
+                <div class="custom-header">Dados bioquímicos</div>
+                <div id="coord"></div>
+            </div>
 
-            <div id="coord"></div>
         </div>
 
     </div>
