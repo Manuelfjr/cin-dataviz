@@ -1,4 +1,5 @@
 import { glyph_by_frame } from './glyph_tracker.js';
+import { glyph } from './glyph.js';
 import playVideo from './video.js';
 import { coords } from './coord.js';
 
@@ -6,17 +7,18 @@ import { coords } from './coord.js';
 
 // Carrega os dados do JSON
 let variaveis = await d3.json("outputs/data_window.json");//"outputs/data_window.json");
-
+let metrics_gerais = await d3.json("outputs/metrics_general.json");
 let dados = await d3.csv("data_horm_concat_corr.csv");
 
 // Função para atualizar a visualização com base no ID do indivíduo
 function atualizarVisualizacao(id) {
     // Encontra o indivíduo específico pelo ID
     let individuo = variaveis.individuos.find(ind => ind.id === id);
-
+    let metrics = metrics_gerais.metrics.find(ind => ind.id === id);
+  
     if (individuo) {
         // Atualiza o gráfico com os dados do indivíduo selecionado
-        glyph_by_frame(individuo.espermatozoides);
+        glyph_by_frame(individuo, metrics);
         playVideo();
         coords(dados, id);
     }

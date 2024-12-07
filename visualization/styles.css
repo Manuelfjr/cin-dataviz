@@ -1,8 +1,54 @@
+#menuSuperior {
+    display: flex;
+    justify-content: flex-end;
+    /* Alinha o menu à direita */
+    background-color: #1a1a2e;
+    /* Cor de fundo elegante */
+    padding: 0px 0px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#menuSuperior a {
+    color: #e9ecef;
+    /* Texto em tom claro */
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#menuSuperior a:hover {
+    background-color: #162447;
+    /* Efeito de hover */
+    color: #f8f9fa;
+}
+
+#menuSuperior a.active {
+    background-color: #162447;
+    /* Destaque da página atual */
+    color: #f8f9fa;
+}
+
+/* Estilo das seções */
+.section {
+    padding: 30px;
+    margin: 20px 0;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /*border: 2px solid red;*/
+    /*border: 2px solid green;*/
 
 }
 
@@ -10,7 +56,7 @@
 body {
     font-family: Arial, sans-serif;
     color: #333;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     background-color: #f4f4f4;
     /* Cor de fundo mais suave */
 }
@@ -70,20 +116,14 @@ select:focus {
 .container {
     margin: auto;
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
-    padding: 10px;
+    padding: 20px;
     border-radius: 8px;
     min-height: 200px;
     background-color: #ffffff;
 
 }
 
-.explication {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 300px;
-}
 
 .button_exp {
     border: none;
@@ -94,7 +134,8 @@ select:focus {
     height: 20px;
     color: rgb(206, 207, 206);
 }
-.img_exp{
+
+.img_exp {
     padding-top: 20px;
     width: 100%;
     border-radius: 8px;
@@ -103,25 +144,28 @@ select:focus {
 .container2 {
     display: flex;
     flex-direction: column;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: calc(23.333% - 20px);
+    width: 20%;
     gap: 10px;
     /* Espaçamento entre as divs */
 
 }
+.container3 {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 10px;
+    /* Espaçamento entre as divs */
 
+}
 /* Estilo para os glifos com borda */
 .glifos {
-    display: flex;
-    flex-grow: 1;
-    /* Pode crescer para preencher o espaço */
-    flex-shrink: 1;
-    /* Pode encolher se necessário */
-    flex-basis: calc(53.333% - 320px);
+    width: 100%;
     text-align: center;
     border: 1px solid #ddd;
     border-radius: 8px;
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    align-items: center;
 }
 
 /* Estilo para o elemento video */
@@ -129,13 +173,11 @@ video {
     display: flex;
     width: 100%;
     /* Faz o vídeo ocupar toda a largura do container */
-    height: auto;
     border-radius: 8px;
 }
 
-.glifo {
+.glifo_metric {
     padding: 20px;
-    background-color: red;
     border: 1px solid #ddd;
     border-radius: 8px;
     height: 100%;
@@ -146,9 +188,7 @@ video {
     border: 1px solid #ddd;
     border-radius: 8px;
     /* Borda mais suave */
-    flex: 1 1 calc(100% - 20px);
-    /* Responsivo: 3 por linha */
-
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
@@ -156,42 +196,4 @@ video {
 #coord svg {
     /* Borda mais suave */
     border-radius: 8px;
-}
-
-
-
-
-
-
-
-/* Adicional: Melhorando a responsividade do layout */
-@media (max-width: 768px) {
-    .container {
-        padding: 10px;
-        flex-direction: column;
-        /* Organiza o layout de forma empilhada em telas pequenas */
-        align-items: stretch;
-    }
-
-    .video-container,
-    .coordenadas {
-        width: 100%;
-        /* As divs ocupam 100% da largura em dispositivos móveis */
-    }
-
-    video {
-        max-width: 100%;
-        /* Ajusta o vídeo para ocupar toda a largura em telas pequenas */
-        margin-right: 10px;
-    }
-
-    .video-info {
-        width: 100%;
-        /* A div à direita também ocupa 100% em telas pequenas */
-    }
-
-    .dropdown select {
-        width: 100%;
-        /* O dropdown ocupa toda a largura da tela em dispositivos móveis */
-    }
 }

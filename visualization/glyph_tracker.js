@@ -1,15 +1,17 @@
-export function glyph_by_frame(espermatozoides) {
+import { glyph } from "./glyph.js";
+
+export function glyph_by_frame(individuo, metrics) {
     d3.selectAll("g").remove();
-    let container = document.querySelector('.glifos');
-    let larguraTela = container.clientWidth;
-    let altura = 600;
+    let div_glifos = document.querySelector('.glifos');
+    let larguraTela = div_glifos.clientWidth;
+    let altura = 400;
     // Configura a dimensão do SVG
     let svg = d3.select("svg")
-        .attr('width', larguraTela*0.9)
+        .attr('width', larguraTela)
         .attr('height', altura);
 
     svg.selectAll(".espermatozoide")
-        .data(espermatozoides)
+        .data(individuo.espermatozoides)
         .enter()
         .append("g")
         .attr("class", "espermatozoide");
@@ -27,10 +29,10 @@ export function glyph_by_frame(espermatozoides) {
         let glifo = d3.select(this).selectAll(".glifo");
 
         glifo.each(function (d, i) {
-            // console.log(d.frames)
             rotate_glyph(d3.select(this), d.frames, i);
             draw_glyph(d3.select(this), d.frames[i]);
-            tooltip_glyph(d3.select(this), d.frames[i]);
+            tooltip_glyph(d3.select(this), d.frames[i], d.id, individuo.id);
+            glyph_metrics_click(d3.select(this), d.id, metrics)
         });
     });
 
@@ -230,18 +232,19 @@ export function draw_glyph(g, d) {
         .attr('text-anchor', 'middle');*/
 
 }
-export function tooltip_glyph(g, d) {
+export function tooltip_glyph(g, d, id_esp) {
+
     // Cria um tooltip na body ou em outro contêiner
     var Tooltip = d3.select("body")  // Pode mudar para outro contêiner, se necessário
         .append("div")
         .style("opacity", 0)
         .attr("class", "tooltip")
-        .style("background-color", "white") 
+        .style("background-color", "white")
         .style("color", "black")
-        .style("border-radius", "8px") 
-        .style("padding", "8px 12px") 
-        .style("font-size", "12px") 
-        .style("box-shadow", "0 2px 6px rgba(0, 0, 0, 0.2)") 
+        .style("border-radius", "8px")
+        .style("padding", "8px 12px")
+        .style("font-size", "12px")
+        .style("box-shadow", "0 2px 6px rgba(0, 0, 0, 0.2)")
         .style("position", "absolute")  // Necessário para o posicionamento absoluto
         .style("pointer-events", "none")  // Impede que o tooltip interfira com os eventos do mouse
         .style("transition", "opacity 0.2s ease-in-out");  // Suaviza a transição de visibilidade
@@ -256,9 +259,9 @@ export function tooltip_glyph(g, d) {
     // Função para mover o tooltip conforme o mouse se move
     var mousemove = function (event) {
         Tooltip
-            .html("VCL: " + d.VCL + "<br>VSL: " + d.VSL + "<br>VAP: " + d.VAP + "<br>ALH: " + d.ALH + "<br>MAD: " + d.MAD)
+            .html("Espermatozóide: " + id_esp + "<br>VCL: " + d.VCL + "<br>VSL: " + d.VSL + "<br>VAP: " + d.VAP + "<br>ALH: " + d.ALH + "<br>MAD: " + d.MAD)
             .style("left", (event.pageX + 20) + "px")  // Calcula a posição horizontal
-            .style("top", (event.pageY ) + "px");  // Calcula a posição vertical
+            .style("top", (event.pageY) + "px");  // Calcula a posição vertical
     }
 
     // Função para esconder o tooltip quando o mouse sai do item
@@ -271,4 +274,15 @@ export function tooltip_glyph(g, d) {
     g.on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave);
+}
+export function glyph_metrics_click(g, id_esp, metrics) {
+
+    // Função para mostrar ou esconder o tooltip ao clicar
+    var clickHandler = function () {
+        let esp_metrics = metrics.trackers.find(esp => esp.tracker_id === id_esp);
+        glyph(esp_metrics);
+    };
+
+    // Adiciona o evento de clique ao glifo
+    g.on("click", clickHandler);
 }

@@ -27,11 +27,13 @@ export function coords(dados, individuo) {
         line: {
             color: colors, // Usando a lista de cores (1 para vermelho, 0 para cinza)
             colorscale: colorScale, // Define a escala de cores personalizada
-            showscale: false // Mostrar escala de cores
+            showscale: false   // Mostrar escala de cores
+
         },
+        labelangle: -25,
         dimensions: [
-            { label: 'ID', values: id, hoverinfo:'label + values'},
-            { label: 'Sperm C17:0', values: spermC17_0 },
+            { label: 'ID', values: id },
+            { label: 'Sperm C17:0', values: spermC17_0, tickangle: 45 },
             { label: 'Total sperm count', values: totalSpermCount },
             { label: 'Sperm C24:0', values: spermC24_0 },
             { label: 'Sperm C18:1 trans', values: spermC18_1_trans },
@@ -48,9 +50,17 @@ export function coords(dados, individuo) {
     };
 
     // Layout do gráfico
+    let div_coord = document.querySelector('#coord');
+    let largura = div_coord.clientWidth;
     const layout = {
-        title: 'Gráfico de Coordenadas Paralelas',
-        height: 600 // Ajuste da altura para o gráfico
+        height: 300, // Ajuste da altura para o gráfico
+        margin: {
+            l: 40, // Margem esquerda
+            r: 40, // Margem direita
+            t: 80, // Margem superior
+            b: 10  // Margem inferior
+        },
+        width: largura - 5
     };
 
     // Renderizar o gráfico
