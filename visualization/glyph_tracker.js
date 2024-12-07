@@ -27,7 +27,7 @@ export function glyph_by_frame(espermatozoides) {
         let glifo = d3.select(this).selectAll(".glifo");
 
         glifo.each(function (d, i) {
-
+            // console.log(d.frames)
             rotate_glyph(d3.select(this), d.frames, i);
             draw_glyph(d3.select(this), d.frames[i]);
             tooltip_glyph(d3.select(this), d.frames[i]);
@@ -55,7 +55,8 @@ export function rotate_glyph(g, frames, i) {
     const centerX = frames[i].x;
     const centerY = frames[i].y;
     let angle = 0;
-
+    // console.log("frames aqui");
+    // console.log(frames);
     if (i < frames.length - 1) {
         // Pega o próximo ponto (subsequente)
         const nextPoint = frames[i + 1];
@@ -65,6 +66,8 @@ export function rotate_glyph(g, frames, i) {
         // Calculando o ângulo entre o ponto atual (d) e o próximo ponto (nextPoint)
         angle = (Math.atan2(nextY - centerY, nextX - centerX) * (180 / Math.PI)) + 90; // Convertendo de radianos para graus
     } else {
+        // console.log("entrou aqui");
+        // console.log(frames[i-1]);
         const previousPoint = frames[i - 1];
         const previousX = previousPoint.x;
         const previousY = previousPoint.y;

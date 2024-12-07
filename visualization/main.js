@@ -5,7 +5,7 @@ import { coords } from './coord.js';
 
 
 // Carrega os dados do JSON
-let variaveis = await d3.json("data.json");
+let variaveis = await d3.json("outputs/data_window.json");//"outputs/data_window.json");
 
 let dados = await d3.csv("data_horm_concat_corr.csv");
 
