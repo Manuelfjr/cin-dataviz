@@ -49,7 +49,10 @@ export function glyph(esp_metrics) {
     drawSemiCircle(radii.inner - 6, radii.inner, "none", color, 0, startAngle, endAngle);
     drawSemiCircle(radii.outer, radii.outer + 6, "none", "rgba(200, 200, 200)", 0, startAngle, -1);
     drawSemiCircle(radii.inner - 6, 0, "none", "rgba(200, 200, 200)", 0, -Math.PI, Math.PI);
-    drawSemiCircle(radii.inner - 6, 0, "gray", "white", 1.5, Math.PI / 6, -Math.PI / 6);
+
+    //MAD
+    let mad = esp_metrics.MAD * Math.PI / 270;
+    drawSemiCircle(radii.inner - 6, 0, "gray", "white", 1.5, mad, -mad);
 
     const lineLength = 45;
 

@@ -57,27 +57,25 @@ export function rotate_glyph(g, frames, i) {
     const centerX = frames[i].x;
     const centerY = frames[i].y;
     let angle = 0;
-    // console.log("frames aqui");
-    // console.log(frames);
-    if (i < frames.length - 1) {
-        // Pega o próximo ponto (subsequente)
-        const nextPoint = frames[i + 1];
-        const nextX = nextPoint.x;
-        const nextY = nextPoint.y;
+    if (frames.length > 1) {
+        if (i < frames.length - 1) {
+            // Pega o próximo ponto (subsequente)
+            const nextPoint = frames[i + 1];
+            const nextX = nextPoint.x;
+            const nextY = nextPoint.y;
 
-        // Calculando o ângulo entre o ponto atual (d) e o próximo ponto (nextPoint)
-        angle = (Math.atan2(nextY - centerY, nextX - centerX) * (180 / Math.PI)) + 90; // Convertendo de radianos para graus
-    } else {
-        // console.log("entrou aqui");
-        // console.log(frames[i-1]);
-        const previousPoint = frames[i - 1];
-        const previousX = previousPoint.x;
-        const previousY = previousPoint.y;
+            // Calculando o ângulo entre o ponto atual (d) e o próximo ponto (nextPoint)
+            angle = (Math.atan2(nextY - centerY, nextX - centerX) * (180 / Math.PI)) + 90; // Convertendo de radianos para graus
+        } else {
+            const previousPoint = frames[i - 1];
+            const previousX = previousPoint.x;
+            const previousY = previousPoint.y;
 
-        // Calculando o ângulo entre o ponto atual (d) e o anterior
-        angle = (Math.atan2(centerY - previousY, centerX - previousX) * (180 / Math.PI)) + 90; // Convertendo de radianos para graus
+            // Calculando o ângulo entre o ponto atual (d) e o anterior
+            angle = (Math.atan2(centerY - previousY, centerX - previousX) * (180 / Math.PI)) + 90; // Convertendo de radianos para graus
+        }
+        g.attr("transform", `rotate(${angle}, ${centerX}, ${centerY})`);
     }
-    g.attr("transform", `rotate(${angle}, ${centerX}, ${centerY})`);
 }
 export function draw_glyph(g, d) {
     const centerX = d.x;

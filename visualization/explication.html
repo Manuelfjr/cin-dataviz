@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head>
     <meta charset="utf-8">
-    <title>JavaScript module example</title>
+    <title>Exemplo de Módulo JavaScript</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> <!-- Inclusão do MathJax -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link rel="stylesheet" href="styles.css">
@@ -55,32 +56,82 @@
             margin-bottom: 0;
         }
     </style>
+
     <div class="explication">
-        <h2>Métricas utilizadas na elaboração dos Glifos</h2>
+        <h2>Explicação das Métricas</h2>
         <img src="imgs\Metrics.png">
         <p>
-            A Figura 3 ilustra as principais medidas cinemáticas observáveis do movimento da cabeça de um
-            espermatozoide, como
-            <strong>VCL</strong> (velocidade curvilínea), <strong>VSL</strong> (velocidade linear) e
-            <strong>VAP</strong> (velocidade média no percurso).
-            Esses parâmetros são fundamentais para analisar os padrões de deslocamento e a progressão dos
-            espermatozoides.
+            Esta seção fornece uma explicação detalhada das métricas calculadas neste projeto.
         </p>
-        <img src="imgs\glifo.png">
-        <p>
-            Já a Figura 5 apresenta o design do glifo desenvolvido para resumir os 20 parâmetros utilizados na análise
-            de movimento e morfologia dos espermatozoides.
-            Esse design utiliza canais visuais independentes para representar os dados de forma compacta e intuitiva,
-            permitindo que cientistas observem tanto
-            o movimento espacial quanto as mudanças temporais em uma única visualização.
+
+        <h3>1. VCL (Velocidade Curvilínea)</h3>
+        <p><strong>Definição</strong>: O VCL representa a velocidade média de um rastreador ao longo de seu caminho curvilíneo real. Ele mede a distância percorrida ao longo do tempo, calculada para cada espermatozoide dentro do conjunto de dados de um paciente.</p>
+        <p><strong>Fórmula Matemática</strong>: 
+            $$v_{ci} = \frac{\|p_{i+1} - p_i\| + \|p_i - p_{i-1}\|}{2\Delta t}$$
+            $$\text{VCL} = \frac{1}{N-2} \sum_{i=1}^{N-1} v_{ci}$$
         </p>
-        <p>
-            O glifo combina informações cinemáticas da cabeça, como velocidades e deslocamentos, com medidas mecânicas
-            da flagela, como assimetria e torque, além de
-            incertezas associadas à análise de imagem. Essa abordagem facilita a comparação entre diferentes células e
-            fornece uma visão abrangente das suas características
-            multivariadas em um contexto espaço-temporal.
+        <p><strong>Onde:</strong><br>
+            - \(p_i\): Posição no quadro \(i\) (por exemplo, $(x_{center}, y_{center})$).<br>
+            - \(|p_{i+1} - p_i\|\): Distância euclidiana entre as posições nos quadros \(i+1\) e \(i\).<br>
+            - \(|p_i - p_{i-1}\|\): Distância euclidiana entre as posições nos quadros \(i\) e \(i-1\).<br>
+            - \(Delta  t\): Intervalo de tempo entre os quadros.<br>
+            - \(N\): Número total de quadros para o rastreador.
         </p>
+
+        <h3>2. VSL (Velocidade em Linha Reta)</h3>
+        <p><strong>Definição</strong>: O VSL mede a velocidade média ao longo de uma linha reta que conecta as posições inicial e final de uma célula espermática. Ele quantifica a eficiência do movimento em termos de sua direta.</p>
+        <p><strong>Fórmula Matemática</strong>: 
+            $$\text{VSL} = \frac{\|p_{\text{end}} - p_{\text{start}}\|}{T}$$
+        </p>
+        <p><strong>Onde:</strong><br>
+            - \(p_{\text{start}}\): Posição inicial.<br>
+            - \(p_{\text{end}}\): Posição final.<br>
+            - \(T\): Tempo total (\(N \cdot \Delta t\)).
+        </p>
+
+        <h3>3. VAP (Velocidade Média do Caminho)</h3>
+        <p><strong>Definição</strong>: O VAP representa a velocidade média ao longo do caminho percorrido pela célula espermática, fornecendo uma medida de sua velocidade média ao longo do tempo.</p>
+        <p><strong>Fórmula Matemática</strong>: 
+            $$\text{total\_distance} = \sum_{i=1}^{n-1} \sqrt{(x_i - x_{i-1})^2 + (y_i - y_{i-1})^2}$$
+            $$\text{total\_time} = (n - 1) \times \Delta t$$
+            $$\text{VAP} = \frac{\text{total\_distance}}{\text{total\_time}}$$
+        </p>
+        <p><strong>Onde:</strong><br>
+            - \(x_i\), \(y_i\): Coordenadas da posição no quadro \(i$.<br>
+            - \(n\): Número total de quadros para o rastreador.<br>
+            - \(\Delta t\): Intervalo de tempo entre os quadros.
+        </p>
+
+        <h3>4. ALH (Amplitude de Deslocamento Lateral da Cabeça)</h3>
+        <p><strong>Definição</strong>: O ALH quantifica a média de desvio da posição do rastreador em relação ao seu caminho médio. Ele reflete o movimento lateral em relação à trajetória.</p>
+        <p><strong>Fórmula Matemática</strong>: 
+            $$\text{ALH} = \frac{1}{N} \sum_{i=1}^{N} \|\bar{p} - p_i\|$$
+        </p>
+        <p><strong>Onde:</strong><br>
+            - \(\bar{p}\): Posição média do rastreador ao longo de todos os quadros (centro do caminho médio).<br>
+            - \(p_i\): Posição no quadro \(i\).
+        </p>
+
+        <h3>5. MAD (Deslocamento Angular Médio)</h3>
+        <p><strong>Definição</strong>: O MAD mede o deslocamento angular médio entre três posições consecutivas. Ele é útil para analisar as mudanças de direção no movimento.</p>
+        <p><strong>Fórmula Matemática</strong>: 
+            $$\theta_i = \cos^{-1}\left(\frac{(p_i - p_{i-1}) \cdot (p_{i+1} - p_i)}{\|p_i - p_{i-1}\| \cdot \|p_{i+1} - p_i\|}\right)$$
+            $$\text{MAD} = \frac{1}{N-2} \sum_{i=2}^{N-1} |\theta_i|$$
+        </p>
+        <p><strong>Onde:</strong><br>
+            - \(\theta_i\): Ângulo entre os vetores formados por três pontos consecutivos.<br>
+            - \(\cdot\): Produto escalar de dois vetores.<br>
+            - \(\| \cdot \|\): Magnitude de um vetor.
+        </p>
+
+        <h3>Notas</h3>
+        <p>- As métricas são calculadas para cada ID de rastreador agrupado por ID de paciente.</p>
+        <p>- \(N\): Número total de quadros por rastreador de esperma.</p>
+        <p>- Todos os cálculos assumem que os dados estão ordenados temporalmente (por exemplo, por `ID`).</p>
+        <p>- Métricas como VCL, VSL e VAP são expressas em unidades de distância por tempo (por exemplo, $\mu m/s$), enquanto ALH é expresso em unidades de distância (por exemplo, $\mu m$), e MAD em graus.</p>
     </div>
 
+</body>
+
 </html>
+

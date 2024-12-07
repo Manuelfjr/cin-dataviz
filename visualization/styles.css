@@ -1,28 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
-#titulo{
+.explication {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    background-color: white;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(136, 132, 132, 0.1);
+    line-height: 1.6;
+}
+
+/* Estilo para o título */
+.explication h2 {
+    font-size: 1.8em;
+    color: #2c3e50;
+    text-align: left;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+}
+
+/* Estilo para os parágrafos */
+.explication p {
+    text-align: left;
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+/* Estilo para as palavras destacadas */
+.explication strong {
+    color: #3498db;
+    font-weight: bold;
+}
+
+/* Ajuste para o container */
+.explication p:last-child {
+    margin-bottom: 0;
+}
+
+.explication img {
+    display: block;
+    width: 450px;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+#titulo {
     display: flex;
     background-color: #1a1a2e;
     align-items: center;
     border-radius: 0 0 8px 8px;
 
 }
+
 .custom-header {
-    background-color: #ddd; /* Cor do fundo do topo */
+    background-color: #ddd;
+    /* Cor do fundo do topo */
     font-family: 'Roboto', sans-serif;
-    color: #7f7c7c; /* Cor do texto */
+    color: #7f7c7c;
+    /* Cor do texto */
     font-size: 0.8em;
     border-radius: 8px 8px 0 0;
-    text-align: center; /* Centraliza o texto */
+    text-align: center;
+    /* Centraliza o texto */
     padding: 5px 5px;
 }
+
 #menu-text {
     color: #e9ecef;
     font-size: 16px;
     padding-left: 20px;
     font-family: 'Roboto', sans-serif;
-    margin-right: auto; /* Move o texto para a esquerda */
+    margin-right: auto;
+    /* Move o texto para a esquerda */
 }
+
 #menuSuperior {
     display: flex;
     justify-content: flex-end;
@@ -70,6 +123,7 @@
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -177,6 +231,7 @@ select:focus {
     /* Espaçamento entre as divs */
 
 }
+
 .container3 {
     display: flex;
     flex-direction: column;
@@ -185,6 +240,7 @@ select:focus {
     /* Espaçamento entre as divs */
 
 }
+
 /* Estilo para os glifos com borda */
 .glifos {
     width: 100%;
