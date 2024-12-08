@@ -13,10 +13,13 @@ export function glyph(esp_metrics) {
     const centerX = largura / 2;
     const centerY = 100;
 
+    const r_vsl = (esp_metrics.VSL + 180)/5;
+    const r_vcl = (esp_metrics.VCL + 180)/5;
+    const r_vap = (esp_metrics.VAP + 180)/5;
     const radii = {
-        outer: 60,
-        middle: 45,
-        inner: 30,
+        outer: r_vcl,
+        middle: r_vap,
+        inner: r_vsl,
     };
 
     // Fenda de 30 graus
@@ -74,9 +77,9 @@ export function glyph(esp_metrics) {
     drawTriangle(baseTriangle, "rgba(100, 100, 100, 0.5)", "rgba(100, 100, 100)", 0);
 
     const topTriangle = [
-        { x: centerX, y: centerY - 72 },
-        { x: centerX - (lineLength / 7), y: centerY - 60 },
-        { x: centerX + (lineLength / 7), y: centerY - 60 }
+        { x: centerX, y: centerY - (radii.outer + 12) },
+        { x: centerX - (lineLength / 7), y: centerY - radii.outer },
+        { x: centerX + (lineLength / 7), y: centerY - radii.outer }
     ];
     drawTriangle(topTriangle, "black", "black", 0);
 
@@ -91,9 +94,9 @@ export function glyph(esp_metrics) {
         .attr("stroke-width", 1.5);
 
     g.append("line") // Linha horizontal
-        .attr("x1", centerX - 24)
+        .attr("x1", centerX - radii.inner +6)
         .attr("y1", centerY)
-        .attr("x2", centerX + 24)
+        .attr("x2", centerX + radii.inner -6)
         .attr("y2", centerY)
         .attr("stroke", "white")
         .attr("stroke-width", 1.5);
