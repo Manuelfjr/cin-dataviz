@@ -58,6 +58,7 @@
     background-color: #ddd;
     /* Cor do fundo do topo */
     font-family: 'Roboto', sans-serif;
+    width: 100%;
     color: #7f7c7c;
     /* Cor do texto */
     font-size: 0.8em;
@@ -243,13 +244,17 @@ select:focus {
 
 /* Estilo para os glifos com borda */
 .glifos {
+    position: relative;
     width: 100%;
+    height: 400px; /* Certifique-se de que a altura seja consistente */
+    overflow: hidden; /* Impede elementos de "vazar" */
     text-align: center;
     border: 1px solid #ddd;
     border-radius: 8px;
     justify-content: center;
     /* Centraliza horizontalmente */
     align-items: center;
+
 }
 
 /* Estilo para o elemento video */
@@ -261,13 +266,21 @@ video {
 }
 
 .glifo_metric {
+    position: relative; /* Necessário para centralização */
+    display: flex;      /* Flexbox ajuda na centralização */
+    flex-direction: column;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: 100%; /* Deve preencher seu contêiner pai */
+    overflow: hidden; /* Impede que elementos "vazem" */
     border: 1px solid #ddd;
     border-radius: 8px;
-    height: 100%;
-    box-sizing: border-box;
+    
 }
 
 .coord {
+    position: relative;
     border: 1px solid #ddd;
     border-radius: 8px;
     /* Borda mais suave */

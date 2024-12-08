@@ -1,14 +1,12 @@
 import { glyph } from "./glyph.js";
 
 export function glyph_by_frame(individuo, metrics) {
-    d3.select(".glifos svg").remove();
     d3.selectAll("g").remove();
     let div_glifos = document.querySelector('.glifos');
     let larguraTela = div_glifos.clientWidth;
-    let altura = div_glifos.clientHeight;
+    let altura = 400;
     // Configura a dimensão do SVG
-    let svg = d3.select(".glifos")
-        .append("svg")
+    let svg = d3.select("svg")
         .attr('width', larguraTela)
         .attr('height', altura);
 
@@ -23,7 +21,7 @@ export function glyph_by_frame(individuo, metrics) {
     espermatozoide.each(function (d, i) {
         let g = d3.select(this);
         draw_route(g, d, i);
-        for (let i = 0; i < d.frames.length; i++) {
+        for (var i = 0; i < d.frames.length; i++) {
             g.append("g")
                 .attr("class", "glifo");
 
@@ -44,7 +42,7 @@ export function draw_route(path, d, i) {
     var pathData = "M" + d.route[0].x + "," + d.route[0].y;  // Começa o caminho no primeiro ponto
 
     // Para cada ponto seguinte, adiciona uma linha (L) para o próximo ponto
-    for (let i = 1; i < d.route.length; i++) {
+    for (var i = 1; i < d.route.length; i++) {
         pathData += " L" + d.route[i].x + "," + d.route[i].y;
     }
     // Adiciona o caminho no SVG
@@ -107,7 +105,7 @@ export function draw_glyph(g, d) {
             .attr("transform", d => `translate(${centerX}, ${centerY})`);;
     }
     let colorScale = d3.scaleSequential()
-        .domain([0, 100]) // Ajuste o domínio conforme necessário
+        .domain([0, 1]) // Ajuste o domínio conforme necessário
         .interpolator(d3.interpolateRainbow);
 
     // Desenhar semicírculos
@@ -118,9 +116,7 @@ export function draw_glyph(g, d) {
     drawSemiCircle(radii.inner - 2, radii.inner, "none", color, 0, startAngle, endAngle); // Semicírculo interno roxo
     drawSemiCircle(radii.outer, radii.outer + 2, "none", "rgba(200, 200, 200)", 0, startAngle, -1); // Semicírculo externo cinza
     drawSemiCircle(radii.inner - 2, 0, "none", "rgba(200, 200, 200)", 0, -Math.PI, Math.PI); // Semicírculo interno roxo
-
-    let mad = (d.MAD * Math.PI / 180)/2;
-    drawSemiCircle(radii.inner - 2, 0, "gray", "white", 0.5, mad, -mad); //semicirculo branco
+    drawSemiCircle(radii.inner - 2, 0, "gray", "white", 0.5, Math.PI / 6, -Math.PI / 6); //semicirculo branco
     const lineLength = 15;
 
     // Função para desenhar triângulos
@@ -237,7 +233,6 @@ export function draw_glyph(g, d) {
 export function tooltip_glyph(g, d, id_esp) {
 
     // Cria um tooltip na body ou em outro contêiner
-    //d3.select(".tooltip").remove();
     var Tooltip = d3.select("body")  // Pode mudar para outro contêiner, se necessário
         .append("div")
         .style("opacity", 0)

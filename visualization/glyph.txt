@@ -38,7 +38,7 @@ export function glyph(esp_metrics) {
     }
 
     let colorScale = d3.scaleSequential()
-        .domain([0, 100])
+        .domain([0, 1])
         .interpolator(d3.interpolateRainbow);
 
     // Desenhar semicírculos
