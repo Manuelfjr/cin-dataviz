@@ -2,6 +2,8 @@
 
 Esse repositorio tem como foco o estudo da segmentação do comportamento de espermatozoides e entedimento de padrões.
 
+[Aqui](/visualization/index.html)
+
 ## How to run
 
 1. Rodar notebooks em sequencia:
