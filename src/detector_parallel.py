@@ -103,6 +103,7 @@ class VideoProcessor:
                         id_tracker: idx2 for idx2, id_tracker in enumerate(self.data_tracker[source_name]["tracker_id"].unique())
                     }
                 )
+                print(self.data_tracker[source_name])
                 if self.save_paths:
                     self.data_tracker[source_name].to_parquet(self.save_paths[idx], index=False)
         return self.data_tracker
