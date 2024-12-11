@@ -4,13 +4,12 @@ export function glyph_by_frame(individuo, metrics) {
     d3.select(".glifos svg").remove();
     d3.selectAll("g").remove();
     let div_glifos = document.querySelector('.glifos');
-    let larguraTela = div_glifos.clientWidth;
     let altura = div_glifos.clientHeight;
     // Configura a dimensão do SVG
     let svg = d3.select(".glifos")
         .append("svg")
-        .attr('width', larguraTela)
-        .attr('height', altura);
+        .attr('width', altura + 50)
+        .attr('height', altura - 100); // menos a altura do título da div do glifo
 
     svg.selectAll(".espermatozoide")
         .data(individuo.espermatozoides)
@@ -58,6 +57,8 @@ export function draw_route(path, d, i) {
 export function rotate_glyph(g, frames, i) {
     const centerX = frames[i].x;
     const centerY = frames[i].y;
+    let div_glifos = document.querySelector('.glifos');
+    let larguraTela = div_glifos.clientWidth;
     let angle = 0;
     if (frames.length > 1) {
         if (i < frames.length - 1) {
@@ -76,6 +77,7 @@ export function rotate_glyph(g, frames, i) {
             // Calculando o ângulo entre o ponto atual (d) e o anterior
             angle = (Math.atan2(centerY - previousY, centerX - previousX) * (180 / Math.PI)) + 90; // Convertendo de radianos para graus
         }
+
         g.attr("transform", `rotate(${angle}, ${centerX}, ${centerY})`);
     }
 }
@@ -83,15 +85,19 @@ export function draw_glyph(g, d) {
     const centerX = d.x;
     const centerY = d.y;
 
+    const r_vsl = (d.VSL + 180) / 12;
+    const r_vcl = (d.VCL + 180) / 12;
+    const r_vap = (d.VAP + 180) / 12;
     const radii = {
-        outer: 20,
-        middle: 15,
-        inner: 10,
+        outer: r_vcl,
+        middle: r_vap,
+        inner: r_vsl,
     };
 
     // Fenda de 30 graus
     let startAngle = -5 * Math.PI / 6; // -30 graus
     let endAngle = 5 * Math.PI / 6;    // 30 graus
+    let baseFix = 12;
 
     // Função para criar semicírculos
     function drawSemiCircle(innerRadius, outerRadius, stroke, fill = "none", strokeWidth = 3, startAngle, endAngle) {
@@ -112,15 +118,29 @@ export function draw_glyph(g, d) {
 
     // Desenhar semicírculos
     let color = colorScale(d.VSL);
-    drawSemiCircle(radii.outer, radii.outer, "gray", "none", 0.5, startAngle, endAngle);
-    drawSemiCircle(radii.middle, radii.middle, "black", "none", 0.5, startAngle, endAngle);
-    drawSemiCircle(radii.inner, radii.inner, "gray", "rgba(200, 200, 200)", 0.5, startAngle, endAngle);
-    drawSemiCircle(radii.inner - 2, radii.inner, "none", color, 0, startAngle, endAngle); // Semicírculo interno roxo
-    drawSemiCircle(radii.outer, radii.outer + 2, "none", "rgba(200, 200, 200)", 0, startAngle, -1); // Semicírculo externo cinza
-    drawSemiCircle(radii.inner - 2, 0, "none", "rgba(200, 200, 200)", 0, -Math.PI, Math.PI); // Semicírculo interno roxo
+    drawSemiCircle(radii.outer, radii.outer, "gray", "none", 0.5, startAngle, endAngle);//VAP
+    drawSemiCircle(radii.middle, radii.middle, "black", "none", 0.5, startAngle, endAngle);//VCL
+    drawSemiCircle(baseFix, radii.inner, "none", color, 0, startAngle, endAngle);//VSL
+    drawSemiCircle(baseFix, 0, "none", "rgba(200, 200, 200)", 0, -Math.PI, Math.PI);//BASE FIXA
+    //ALH
 
-    let mad = (d.MAD * Math.PI / 180)/2;
-    drawSemiCircle(radii.inner - 2, 0, "gray", "white", 0.5, mad, -mad); //semicirculo branco
+    // Criar uma escala para mapear ALH (0-100) para o intervalo de graus (-30° a 30°)
+    const alhToAngle = d3.scaleLinear()
+        .domain([0, 50]) // Intervalo de entrada (valores de ALH)
+        .range([startAngle, endAngle]); // Intervalo de saída (graus)
+
+    // Exemplo: Mapeando o valor de ALH para endAngle
+    const alhValue = d.ALH; // Substitua pelo valor atual de ALH
+    const endAngleDegrees = alhToAngle(alhValue); // Converte ALH para graus
+
+    // Usa o valor mapeado na função drawSemiCircle
+    drawSemiCircle(radii.outer, radii.outer + 2, "none", "rgba(200, 200, 200)", 0, startAngle, endAngleDegrees);
+   
+    //MAD
+
+    let mad = (d.MAD * Math.PI / 180) / 2 *50;
+    drawSemiCircle(baseFix, 0, "gray", "white", 1.5, mad, -mad);
+
     const lineLength = 15;
 
     // Função para desenhar triângulos
@@ -140,12 +160,6 @@ export function draw_glyph(g, d) {
     ];
     drawTriangle(baseTriangle, "rgba(100, 100, 100, 0.5)", "rgba(100, 100, 100)", 0);
 
-    const topTriangle = [
-        { x: centerX, y: centerY - 24 },
-        { x: centerX - (lineLength / 7), y: centerY - 20 },
-        { x: centerX + (lineLength / 7), y: centerY - 20 }
-    ];
-    drawTriangle(topTriangle, "black", "black", 0);
 
     // Adicionar linhas em cruz
     const crossLength = 50;
@@ -158,9 +172,9 @@ export function draw_glyph(g, d) {
         .attr("stroke-width", 0.5);
 
     g.append("line") // Linha horizontal
-        .attr("x1", centerX - 8)
+        .attr("x1", centerX - baseFix)
         .attr("y1", centerY)
-        .attr("x2", centerX + 8)
+        .attr("x2", centerX + baseFix)
         .attr("y2", centerY)
         .attr("stroke", "white")
         .attr("stroke-width", 0.5);
@@ -221,17 +235,23 @@ export function draw_glyph(g, d) {
     }
 
 
+    const alhToLine = d3.scaleLinear()
+        .domain([startAngle, endAngle]) // Intervalo de entrada (valores de ALH)
+        .range([1, 6]); // Intervalo de saída (linhas)
+
+
+    for (let i = 0; i <= alhToLine(endAngleDegrees); i++) {
+        drawLine(120 + (i * 30), "rgba(170, 170, 170)");
+    }
     drawLine(0, "black");
     drawLine(180, "black");
-    drawLine(150, "rgba(170, 170, 170)");
-    drawLine(120, "rgba(170, 170, 170)");
-    drawLine(210, "rgba(170, 170, 170)");
+    const topTriangle = [
+        { x: centerX, y: centerY - (radii.outer + 6) },
+        { x: centerX - (lineLength / 7), y: centerY - radii.outer },
+        { x: centerX + (lineLength / 7), y: centerY - radii.outer }
+    ];
+    drawTriangle(topTriangle, "black", "black", 0);
 
-    /*glifo.append("text")
-        .text("Sperm " + d.VSL)
-        .attr('x', centerX)
-        .attr('y', centerY + 25)
-        .attr('text-anchor', 'middle');*/
 
 }
 export function tooltip_glyph(g, d, id_esp) {

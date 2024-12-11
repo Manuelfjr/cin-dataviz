@@ -10,12 +10,15 @@ export function glyph(esp_metrics) {
 
     let t = d3.select(".glifo_metric").select(".custom-header").html("Sumarização do espermatozóide #" + esp_metrics.tracker_id);
     console.log(t);
-    const centerX = largura / 2;
-    const centerY = 100;
 
-    const r_vsl = (esp_metrics.VSL + 180)/5;
-    const r_vcl = (esp_metrics.VCL + 180)/5;
-    const r_vap = (esp_metrics.VAP + 180)/5;
+
+    const r_vsl = (esp_metrics.VSL + 180) / 5;
+    const r_vcl = (esp_metrics.VCL + 180) / 5;
+    const r_vap = (esp_metrics.VAP + 180) / 5;
+
+    const centerX = largura / 2;
+    const centerY = r_vcl + 30;
+
     const radii = {
         outer: r_vcl,
         middle: r_vap,
@@ -25,6 +28,7 @@ export function glyph(esp_metrics) {
     // Fenda de 30 graus
     let startAngle = -5 * Math.PI / 6; // -30 graus
     let endAngle = 5 * Math.PI / 6;    // 30 graus
+    let baseFix = 30;
 
     // Função para criar semicírculos
     function drawSemiCircle(innerRadius, outerRadius, stroke, fill = "none", strokeWidth = 9, startAngle, endAngle) {
@@ -46,16 +50,30 @@ export function glyph(esp_metrics) {
 
     // Desenhar semicírculos
     let color = colorScale(esp_metrics.VSL);
-    drawSemiCircle(radii.outer, radii.outer, "gray", "none", 1.5, startAngle, endAngle);
-    drawSemiCircle(radii.middle, radii.middle, "black", "none", 1.5, startAngle, endAngle);
-    drawSemiCircle(radii.inner, radii.inner, "gray", "rgba(200, 200, 200)", 1.5, startAngle, endAngle);
-    drawSemiCircle(radii.inner - 6, radii.inner, "none", color, 0, startAngle, endAngle);
-    drawSemiCircle(radii.outer, radii.outer + 6, "none", "rgba(200, 200, 200)", 0, startAngle, -1);
-    drawSemiCircle(radii.inner - 6, 0, "none", "rgba(200, 200, 200)", 0, -Math.PI, Math.PI);
+    drawSemiCircle(radii.outer, radii.outer, "gray", "none", 1.5, startAngle, endAngle);//VAP
+    drawSemiCircle(radii.middle, radii.middle, "black", "none", 1.5, startAngle, endAngle);//VCL
+    drawSemiCircle(baseFix, radii.inner, "none", color, 0, startAngle, endAngle);//VSL
+    drawSemiCircle(baseFix, 0, "none", "rgba(200, 200, 200)", 0, -Math.PI, Math.PI);//BASE FIXA
+
+    //ALH
+
+    // Criar uma escala para mapear ALH (0-100) para o intervalo de graus (-30° a 30°)
+    const alhToAngle = d3.scaleLinear()
+        .domain([0, 80]) // Intervalo de entrada (valores de ALH)
+        .range([startAngle, endAngle]); // Intervalo de saída (graus)
+
+    // Exemplo: Mapeando o valor de ALH para endAngle
+    const alhValue = esp_metrics.ALH; // Substitua pelo valor atual de ALH
+    const endAngleDegrees = alhToAngle(alhValue); // Converte ALH para graus
+
+    // Usa o valor mapeado na função drawSemiCircle
+    drawSemiCircle(radii.outer, radii.outer + 6, "none", "rgba(200, 200, 200)", 0, startAngle, endAngleDegrees);
+
 
     //MAD
-    let mad = (esp_metrics.MAD * Math.PI / 180)/2;
-    drawSemiCircle(radii.inner - 6, 0, "gray", "white", 1.5, mad, -mad);
+
+    let mad = (esp_metrics.MAD * Math.PI / 180) / 2 *50;
+    drawSemiCircle(baseFix, 0, "gray", "white", 1.5, mad, -mad);
 
     const lineLength = 45;
 
@@ -76,15 +94,9 @@ export function glyph(esp_metrics) {
     ];
     drawTriangle(baseTriangle, "rgba(100, 100, 100, 0.5)", "rgba(100, 100, 100)", 0);
 
-    const topTriangle = [
-        { x: centerX, y: centerY - (radii.outer + 12) },
-        { x: centerX - (lineLength / 7), y: centerY - radii.outer },
-        { x: centerX + (lineLength / 7), y: centerY - radii.outer }
-    ];
-    drawTriangle(topTriangle, "black", "black", 0);
+
 
     // Adicionar linhas em cruz
-    const crossLength = 150;
     g.append("line") // Linha vertical
         .attr("x1", centerX)
         .attr("y1", centerY)
@@ -94,9 +106,9 @@ export function glyph(esp_metrics) {
         .attr("stroke-width", 1.5);
 
     g.append("line") // Linha horizontal
-        .attr("x1", centerX - radii.inner +6)
+        .attr("x1", centerX - baseFix)
         .attr("y1", centerY)
-        .attr("x2", centerX + radii.inner -6)
+        .attr("x2", centerX + baseFix)
         .attr("y2", centerY)
         .attr("stroke", "white")
         .attr("stroke-width", 1.5);
@@ -153,15 +165,29 @@ export function glyph(esp_metrics) {
             .attr("stroke-width", 3);
     }
 
+
+    const alhToLine = d3.scaleLinear()
+        .domain([startAngle, endAngle]) // Intervalo de entrada (valores de ALH)
+        .range([1, 11]); // Intervalo de saída (linhas)
+
+
+    for (let i = 0; i <= alhToLine(endAngleDegrees); i++) {
+        drawLine(120 + (i * 30), "rgba(170, 170, 170)");
+    }
     drawLine(0, "black");
     drawLine(180, "black");
-    drawLine(150, "rgba(170, 170, 170)");
-    drawLine(120, "rgba(170, 170, 170)");
-    drawLine(210, "rgba(170, 170, 170)");
+
+    const topTriangle = [
+        { x: centerX, y: centerY - (radii.outer + 12) },
+        { x: centerX - (lineLength / 7), y: centerY - radii.outer },
+        { x: centerX + (lineLength / 7), y: centerY - radii.outer }
+    ];
+    drawTriangle(topTriangle, "black", "black", 0);
+
 
     g.append("text")
         .attr("x", centerX)                    // Posição X do texto (horizontal)
-        .attr("y", 200)                        // Posição Y inicial do texto (vertical)
+        .attr("y", centerY*2)                        // Posição Y inicial do texto (vertical)
         .attr("font-size", "16px")             // Tamanho da fonte
         .attr("fill", "black")                 // Cor do texto
         .attr("text-anchor", "middle")         // Alinha horizontalmente no centro
