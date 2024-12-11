@@ -14,6 +14,7 @@ conf/local/*
 data/03_primary/tracker_video/*.mp4
 data/03_primary/tracker_data/*.csv
 
+visualization/outputs/*.json
 data/*
 datasets/*
 
