@@ -18,6 +18,8 @@ visualization/outputs/*.json
 data/*
 datasets/*
 
+*Zone.Identifier
+
 # Exclude extras
 *.lock
 
