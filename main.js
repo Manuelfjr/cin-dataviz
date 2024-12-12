@@ -20,11 +20,38 @@ function downloadFile(url, filename) {
 }
 
 // Carrega os dados do JSON
-// URL de download
+// URL de download https://media.githubusercontent.com/media/Manuelfjr/cin-dataviz/develop/outputs/metrics_general.json
 
-const variaveis = await d3.json("outputs/data_window.json");
-const metrics_gerais = await d3.json("metrics_general.json");
-const dados = await d3.csv("outputs/data_horm_concat_corr.csv");
+
+async function fetchLargeFileFromGitHub(path, file) {
+    const url = `${path}/${file}`;
+    try {
+        const response = await fetch(url, {
+            headers: {
+                // 'Authorization': `token ${token}`,
+                'Accept': 'application/vnd.github.v3.raw'
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error('Error fetching file:', error);
+    }
+}
+
+const metrics_general = await fetchLargeFileFromGitHub("https://media.githubusercontent.com/media/Manuelfjr/cin-dataviz/develop/outputs", "metrics_general.json");
+console.log("passou o zero");
+const data_window = await fetchLargeFileFromGitHub("https://media.githubusercontent.com/media/Manuelfjr/cin-dataviz/develop/outputs", "data_window.json");
+console.log("passou o primeiro");
+const variaveis = await data_window; //d3.json("outputs/data_window.json");
+console.log("passou o segundo");
+const metrics_gerais = await metrics_general;//d3.json("outputs/metrics_general.json");
+const dados = await d3.csv("https://raw.githubusercontent.com/Manuelfjr/cin-dataviz/refs/heads/develop/outputs/data_horm_concat_corr.csv");
+
 
 // Função para atualizar a visualização com base no ID do indivíduo
 function atualizarVisualizacao(id) {
