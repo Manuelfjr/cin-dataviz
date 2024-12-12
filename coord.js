@@ -19,7 +19,8 @@ export function coords(dados, individuo) {
     const colors = id.map(val => (val == individuo ? 1 : 0)); // 1 para a linha selecionada, 0 para as outras
 
     // Criar uma escala de cores para usar cinza e vermelho
-    const colorScale = [[0, 'rgb(150,150,150)'], [1, 'rgb(255,0,0)']];
+    // const colorScale = [[0, 'rgb(150,150,150)'], [1, 'rgb(255,0,0)']];
+    const colorScale = [[0, 'rgb(96, 96, 221)'], [1, 'rgb(255,0,0)']];
 
     // Criar o trace (dados) do gráfico
     const trace = {
