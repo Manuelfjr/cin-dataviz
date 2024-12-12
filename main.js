@@ -21,12 +21,6 @@ function downloadFile(url, filename) {
 
 // Carrega os dados do JSON
 // URL de download
-const fileUrl = 'https://github.com/Manuelfjr/cin-dataviz/raw/refs/heads/develop/outputs/metrics_general.json';
-const fileName = 'metrics_general.json';
-
-// Baixar o arquivo
-downloadFile(fileUrl, fileName);
-
 
 const variaveis = await d3.json("outputs/data_window.json");
 const metrics_gerais = await d3.json("metrics_general.json");
