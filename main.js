@@ -3,9 +3,33 @@ import { glyph } from './glyph.js';
 import playVideo from './video.js';
 import { coords } from './coord.js';
 
+function downloadFile(url, filename) {
+    // Create an anchor element
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+
+    // Append the anchor to the body
+    document.body.appendChild(a);
+
+    // Programmatically click the anchor
+    a.click();
+
+    // Remove the anchor from the body
+    document.body.removeChild(a);
+}
+
 // Carrega os dados do JSON
+// URL de download
+const fileUrl = 'https://github.com/Manuelfjr/cin-dataviz/raw/refs/heads/develop/outputs/metrics_general.json';
+const fileName = 'metrics_general.json';
+
+// Baixar o arquivo
+downloadFile(fileUrl, fileName);
+
+
 const variaveis = await d3.json("outputs/data_window.json");
-const metrics_gerais = await d3.json("outputs/metrics_general.json");
+const metrics_gerais = await d3.json("metrics_general.json");
 const dados = await d3.csv("outputs/data_horm_concat_corr.csv");
 
 // Função para atualizar a visualização com base no ID do indivíduo
