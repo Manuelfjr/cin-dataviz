@@ -4,18 +4,18 @@ export async function barrasBody(id) {
     try {
         const data = await d3.csv("outputs/df_grouped.csv");
 
-        // Definir faixas etárias
-        const bins = [0, 18.5, 25, 30, 35, 40];
-        const labels = ['0-18,5', '18,5-24,9', '25-29,9', '30-34,9', '35-39,9', '40+'];
+        // Definir faixas de IMC
+        const bins = [0, 18.5, 25, 30, 35, 40, 100];
+        const labels = ['Abaixo do peso', 'Peso normal', 'Sobrepeso', 'Obesidade Grau I', 'Obesidade Grau II', 'Obesidade Grau III'];
 
-        // Agrupar e processar os dados
+        // Agrupar e processar os dados por IMC
         let groupedData = {};
         data.forEach(d => {
-            let body = +d['Body mass index (kg/m²)'];
-            let group = labels[bins.findIndex((b, i) => body >= b && body < bins[i + 1]) -1];
+            let bmi = +d['Body mass index (kg/m²)'];
+            let group = labels[bins.findIndex((b, i) => bmi >= b && bmi < bins[i + 1]) - 1];
 
             if (!groupedData[group]) {
-                groupedData[group] = { 'Body_Group': group, 'Tipo_A': 0, 'Tipo_B': 0, 'Tipo_C': 0, 'Tipo_D': 0, 'Hiperativo': 0, 'Total': 0 };
+                groupedData[group] = { 'BMI_Group': group, 'Tipo_A': 0, 'Tipo_B': 0, 'Tipo_C': 0, 'Tipo_D': 0, 'Hiperativo': 0, 'Total': 0 };
             }
 
             ['Tipo_A', 'Tipo_B', 'Tipo_C', 'Tipo_D', 'Hiperativo'].forEach(tipo => {
@@ -29,7 +29,7 @@ export async function barrasBody(id) {
             const group = groupedData[label] || { 'Tipo_A': 0, 'Tipo_B': 0, 'Tipo_C': 0, 'Tipo_D': 0, 'Hiperativo': 0, 'Total': 1 };
 
             return {
-                Body_Group: label,
+                BMI_Group: label,
                 Tipo_A: group['Tipo_A'] / group['Total'],
                 Tipo_B: group['Tipo_B'] / group['Total'],
                 Tipo_C: group['Tipo_C'] / group['Total'],
@@ -47,16 +47,15 @@ export async function barrasBody(id) {
             Tipo_C: parseFloat(idBarras['Tipo_C']),
             Tipo_D: parseFloat(idBarras['Tipo_D']),
             Hiperativo: parseFloat(idBarras['Hiperativo']),
-            body: idBarras['Body mass index (kg/m²)']
+            bmi: idBarras['Body mass index (kg/m²)']
         };
 
         console.log(dadosUsuario);
-        // Encontrar faixa etária do usuário
-        const userBodyGroup = labels[bins.findIndex((b, i) => dadosUsuario.body >= b && dadosUsuario.body < bins[i + 1])];
-       
+        // Encontrar faixa de IMC do usuário
+        const userBMIGroup = labels[bins.findIndex((b, i) => dadosUsuario.bmi >= b && dadosUsuario.bmi < bins[i + 1])];
+
         // Função para determinar seta
         const getArrow = (userValue, groupValue) => userValue > groupValue ? '↑' : '↓';
-
 
         // Configurar as barras para Plotly
         const xValues = labels;
@@ -73,12 +72,9 @@ export async function barrasBody(id) {
 
         // Comparar valores do usuário com médias e criar anotações
         const annotations = ['Tipo_A', 'Tipo_B', 'Tipo_C', 'Tipo_D', 'Hiperativo'].map((tipo, i) => {
-            console.log(dadosUsuario);
             const userValue = (dadosUsuario[tipo]) / (dadosUsuario['Tipo_A'] + dadosUsuario['Tipo_B'] + dadosUsuario['Tipo_C'] + dadosUsuario['Tipo_D'] + dadosUsuario['Hiperativo']);
-            
-            const valorPadrao = finalData.find(d => d.Body_Group === userBodyGroup);
-            const groupValue = finalData.find(d => d.Body_Group === userBodyGroup)[tipo];
-            
+            const valorPadrao = finalData.find(d => d.BMI_Group === userBMIGroup);
+            const groupValue = valorPadrao[tipo];
             let groupValue2 = 0;
             if (tipo == 'Tipo_A') {
                 groupValue2 = 0;
@@ -95,11 +91,11 @@ export async function barrasBody(id) {
             }
 
             return {
-                x: userBodyGroup,
-                y: groupValue2, // Posição um pouco acima da barra
-                text:  getArrow(userValue, groupValue),
+                x: userBMIGroup,
+                y: groupValue2,
+                text: getArrow(userValue, groupValue),
                 showarrow: false,
-                font: { size: 20, weight: '2', color: 'white'} //userValue > groupValue ? 'green' : 'red' }
+                font: { size: 20, weight: '2', color: 'white' }
             };
         });
 
@@ -108,9 +104,9 @@ export async function barrasBody(id) {
             barmode: 'stack',
             width: '450',
             height: '300',
-            title: 'Massa Corporal x Tipo de Espermatozóide',
-            xaxis: { title: 'Indice de massa corporal' },
-            yaxis: { title: 'Proporção (%)', tickformat: ',.0%', range: [0, 1]},
+            title: 'IMC x Tipo de espermatozóide',
+            xaxis: { title: 'Faixa de IMC' },
+            yaxis: { title: 'Proporção (%)', tickformat: ',.0%', range: [0, 1] },
             annotations: annotations,
             margin: { t: 50, r: 0, b: 50, l: 50 },
             font: {
