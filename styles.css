@@ -257,13 +257,11 @@ select:focus {
     position: relative;
     width: 100%;
     overflow: hidden;
-    height: 100%; /* Certifique-se de que a altura seja consistente */
+    height: 600px; /* Certifique-se de que a altura seja consistente */
      /* Impede elementos de "vazar" */
-    
+
     border: 1px solid #ddd;
     border-radius: 8px;
-    text-align: center;
-    /* Centraliza horizontalmente */
 
 }
 .glifos svg{
@@ -318,17 +316,14 @@ video {
     justify-content: space-between; /* Adiciona espaço entre as divs */
     align-items: flex-start; /* Alinha as divs no topo */
     gap: 20px; /* Espaço entre as divs */
-    text-align: center;
+    
     border: 1px solid #ddd;
     border-radius: 8px; /* Bordas arredondadas */
 }
 
 #barras, #barrasAMH svg{
-    
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    text-align: center;
-    height: 310px; /* Define a altura das divs */
+    width: 90%;
+    height: 300px; /* Define a altura das divs */
     padding: 0px; /* Espaçamento interno */
     background-color: #f9f9f900; /* Cor de fundo */
 }
