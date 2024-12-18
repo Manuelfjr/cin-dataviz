@@ -2,6 +2,9 @@ import { glyph_by_frame } from './glyph_tracker.js';
 import { glyph } from './glyph.js';
 import playVideo from './video.js';
 import { coords } from './coord.js';
+import { barras } from './barras.js';
+import { barrasBody } from './barrasBody.js';
+import { barrasDFI } from './barrasDFI.js';
 
 function downloadFile(url, filename) {
     // Create an anchor element
@@ -42,7 +45,7 @@ async function fetchLargeFileFromGitHub(path, file) {
         console.error('Error fetching file:', error);
     }
 }
-
+/*
 const metrics_general = await fetchLargeFileFromGitHub("https://media.githubusercontent.com/media/Manuelfjr/cin-dataviz/develop/outputs", "metrics_general.json");
 console.log("passou o zero");
 const data_window = await fetchLargeFileFromGitHub("https://media.githubusercontent.com/media/Manuelfjr/cin-dataviz/develop/outputs", "data_window.json");
@@ -51,19 +54,27 @@ const variaveis = await data_window; //d3.json("outputs/data_window.json");
 console.log("passou o segundo");
 const metrics_gerais = await metrics_general;//d3.json("outputs/metrics_general.json");
 const dados = await d3.csv("https://raw.githubusercontent.com/Manuelfjr/cin-dataviz/refs/heads/develop/outputs/data_horm_concat_corr.csv");
-
+*/
+// Carrega os dados do JSON
+const variaveis = await d3.json("outputs/data_window2.json");
+const metrics_gerais = await d3.json("outputs/metrics_general2.json");
+const dados = await d3.csv("outputs/data_horm_concat_corr.csv");
 
 // Função para atualizar a visualização com base no ID do indivíduo
-function atualizarVisualizacao(id) {
+function atualizarVisualizacao(id, tipo) {
     // Encontra o indivíduo específico pelo ID
     const individuo = variaveis.individuos.find(ind => ind.id === id);
     const metrics = metrics_gerais.metrics.find(ind => ind.id === id);
 
     if (individuo && metrics) {
         // Atualiza o gráfico com os dados do indivíduo selecionado
-        glyph_by_frame(individuo, metrics);
+        console.log("Main> " + tipo);
+        glyph_by_frame(individuo, metrics, tipo);
         playVideo(metrics);
         coords(dados, id);
+        barras(id);
+        barrasBody(id);
+        barrasDFI(id);
     }
 }
 
@@ -83,6 +94,22 @@ function atualizarDropdownEspermatozoides(individuo) {
         .attr("value", d => d.id)
         .text(d => `Esperm. ${d.id}`);
 }
+function atualizarDropdownTipo(metrics){
+    const dropdownEspermatozoides = d3.select("#tipo");
+    // Limpa opções existentes
+    dropdownEspermatozoides.selectAll("option").remove();
+    const tipos = ['Todos'].concat(Object.keys(metrics.sperm_types));
+    console.log(tipos);
+    // Adiciona novas opções
+    dropdownEspermatozoides
+        .selectAll("option")
+        .data(tipos)
+        .enter()
+        .append("option")
+        .attr("value", d => d)
+        .text(d => d);
+
+}
 
 // Cria o dropdown com os IDs dos indivíduos
 d3.select("#individuos")
@@ -97,10 +124,12 @@ d3.select("#individuos")
 d3.select("#individuos").on("change", function () {
     const idSelecionado = +this.value; // Obtém o ID do indivíduo selecionado
     const individuo = variaveis.individuos.find(ind => ind.id === idSelecionado);
+    const metrics = metrics_gerais.metrics.find(ind => ind.id === idSelecionado);
 
     if (individuo) {
         atualizarDropdownEspermatozoides(individuo); // Atualiza o dropdown de espermatozoides
-        atualizarVisualizacao(idSelecionado); // Atualiza a visualização
+        atualizarDropdownTipo(metrics);
+        atualizarVisualizacao(idSelecionado, 'Todos'); // Atualiza a visualização
     }
 });
 
@@ -114,6 +143,21 @@ d3.select("#espermatozoides").on("change", function () {
 
     if (espMetrics) {
         glyph(espMetrics); // Atualiza o glifo do espermatozoide
+        atualizarDropdownTipo(metrics);
+    }
+});
+
+d3.select("#tipo").on("change", function () {
+    const tipo = this.value; // Obtém o ID do espermatozoide selecionado
+    const idInd = +d3.select("#individuos").node().value; // Obtém o ID do indivíduo atualmente selecionado
+    const idEsp = +d3.select("#espermatozoides").node().value;
+
+    const metrics = metrics_gerais.metrics.find(ind => ind.id === idInd);
+    const espMetrics = metrics?.trackers?.find(esp => esp.tracker_id === idEsp);
+
+    if (espMetrics) {
+        atualizarVisualizacao(idInd, tipo)
+        atualizarDropdownTipo(metrics);
     }
 });
 
@@ -125,8 +169,9 @@ const individuoPadrao = variaveis.individuos.find(ind => ind.id === idPadrao);
 const metrics = metrics_gerais.metrics.find(ind => ind.id === idPadrao);
 const esp_metrics = metrics.trackers.find(esp => esp.tracker_id === idEspPadrao);
 
-if (individuoPadrao) {
+if (individuoPadrao, metrics) {
     atualizarDropdownEspermatozoides(individuoPadrao);
-    atualizarVisualizacao(idPadrao);
+    atualizarDropdownTipo(metrics);
+    atualizarVisualizacao(idPadrao, 'Todos');
     glyph(esp_metrics);
 }

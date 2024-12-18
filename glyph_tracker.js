@@ -1,6 +1,18 @@
 import { glyph } from "./glyph.js";
 
-export function glyph_by_frame(individuo, metrics) {
+export function glyph_by_frame(individuo, metrics, tipo) {
+    console.log(tipo);
+    
+    let espermatozoides;
+    if(tipo == 'Todos'){
+        espermatozoides = individuo.espermatozoides;
+    }else{
+        const d = metrics.sperm_types[tipo];
+        console.log(metrics.sperm_types["Tipo A"]);
+        const esp = individuo.espermatozoides;
+        espermatozoides = esp.filter(item => d.includes(item.id));
+    }
+    
     d3.select(".glifos svg").remove();
     d3.selectAll("g").remove();
     let div_glifos = document.querySelector('.glifos');
@@ -9,10 +21,10 @@ export function glyph_by_frame(individuo, metrics) {
     let svg = d3.select(".glifos")
         .append("svg")
         .attr('width', altura + 50)
-        .attr('height', altura - 100); // menos a altura do título da div do glifo
+        .attr('height', '100%'); // menos a altura do título da div do glifo
 
     svg.selectAll(".espermatozoide")
-        .data(individuo.espermatozoides)
+        .data(espermatozoides)
         .enter()
         .append("g")
         .attr("class", "espermatozoide");
@@ -28,13 +40,13 @@ export function glyph_by_frame(individuo, metrics) {
 
         }
         let glifo = d3.select(this).selectAll(".glifo");
-
-        glifo.each(function (d, i) {
-            rotate_glyph(d3.select(this), d.frames, i);
-            draw_glyph(d3.select(this), d.frames[i]);
-            tooltip_glyph(d3.select(this), d.frames[i], d.id, individuo.id);
-            glyph_metrics_click(d3.select(this), d.id, metrics)
-        });
+        
+                glifo.each(function (d, i) {
+                    rotate_glyph(d3.select(this), d.frames, i);
+                    draw_glyph(d3.select(this), d.frames[i]);
+                    tooltip_glyph(d3.select(this), d.frames[i], d.id, individuo.id);
+                    glyph_metrics_click(d3.select(this), d.id, metrics)
+                });
     });
 
 
@@ -135,10 +147,10 @@ export function draw_glyph(g, d) {
 
     // Usa o valor mapeado na função drawSemiCircle
     drawSemiCircle(radii.outer, radii.outer + 2, "none", "rgba(200, 200, 200)", 0, startAngle, endAngleDegrees);
-   
+
     //MAD
 
-    let mad = (d.MAD * Math.PI / 180) / 2 *50;
+    let mad = (d.MAD * Math.PI / 180) / 2 * 50;
     drawSemiCircle(baseFix, 0, "gray", "white", 1.5, mad, -mad);
 
     const lineLength = 15;

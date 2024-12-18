@@ -4,9 +4,9 @@ export default function playVideo(metrics) {
 
   // Divide o caminho em partes usando "\\" e obtém os dois últimos segmentos
   const partsOriginal = videoOriginal.split("\\").slice(-2).join("\\");
-  const srcvideoOriginal = videoOriginal;//`outputs\\${partsOriginal}`;
+  const srcvideoOriginal = `outputs\\${partsOriginal}`; //videoOriginal;
   const partsTrackeado = videoTrackeado.split("\\").slice(-2).join("\\");
-  const srcvideoTrackeado = videoTrackeado;//`outputs\\${partsTrackeado}`;
+  const srcvideoTrackeado = `outputs\\${partsTrackeado}`; //videoTrackeado;
   
   console.log(metrics.id);
   console.log(srcvideoOriginal);

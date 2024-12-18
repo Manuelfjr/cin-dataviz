@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Glyphos</title>
+    <title>Glifos</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -20,6 +21,7 @@
             <div class="dropdown">
                 <select id="individuos"></select>
                 <select id="espermatozoides"></select>
+                <select id="tipo"></select>
             </div>
             <div>
                 <video controls id="video"></video>
@@ -27,20 +29,35 @@
             <div>
                 <video controls id="video-tracker"></video>
             </div>
-            <div class="glifo_metric">
-                <div class="custom-header">Sumarização do espermatozóide</div>
-            </div>
+
         </div>
         <div class="container3">
             <div class="glifos">
                 <div class="custom-header">Sumarização das trajetórias dos espermatozóides por indivíduo</div>
                 <svg></svg>
-            </div>
-            <div class="coord">
-                <div class="custom-header">Dados bioquímicos</div>
-                <div id="coord"></div>
-            </div>
+                <div id="loading-message" style="display: none;">Carregando dados, por favor aguarde...</div>
 
+            </div>
+        </div>
+
+        <div class="container4">
+            <div class="glifo_metric">
+                <div class="custom-header">Sumarização do espermatozóide</div>
+
+            </div>
+        </div>
+        <div class="barras">
+            <div id="barras"></div>
+        </div>
+        <div class="barras">
+            <div id="barrasBody"></div>
+        </div>
+        <div class="barras">
+            <div id="barrasDFI"></div>
+        </div>
+        <div class="coord">
+            <div class="custom-header">Dados bioquímicos</div>
+            <div id="coord"></div>
         </div>
 
     </div>
