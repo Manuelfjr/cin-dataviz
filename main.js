@@ -45,20 +45,20 @@ async function fetchLargeFileFromGitHub(path, file) {
         console.error('Error fetching file:', error);
     }
 }
-/*
-const metrics_general = await fetchLargeFileFromGitHub("https://media.githubusercontent.com/media/Manuelfjr/cin-dataviz/develop/outputs", "metrics_general.json");
+
+const metrics_general = await fetchLargeFileFromGitHub("https://media.githubusercontent.com/media/Manuelfjr/cin-dataviz/develop/outputs", "metrics_general2.json");
 console.log("passou o zero");
-const data_window = await fetchLargeFileFromGitHub("https://media.githubusercontent.com/media/Manuelfjr/cin-dataviz/develop/outputs", "data_window.json");
+const data_window = await fetchLargeFileFromGitHub("https://media.githubusercontent.com/media/Manuelfjr/cin-dataviz/develop/outputs", "data_window2.json");
 console.log("passou o primeiro");
 const variaveis = await data_window; //d3.json("outputs/data_window.json");
 console.log("passou o segundo");
 const metrics_gerais = await metrics_general;//d3.json("outputs/metrics_general.json");
 const dados = await d3.csv("https://raw.githubusercontent.com/Manuelfjr/cin-dataviz/refs/heads/develop/outputs/data_horm_concat_corr.csv");
-*/
+
 // Carrega os dados do JSON
-const variaveis = await d3.json("outputs/data_window2.json");
-const metrics_gerais = await d3.json("outputs/metrics_general2.json");
-const dados = await d3.csv("outputs/data_horm_concat_corr.csv");
+// const variaveis = await d3.json("outputs/data_window2.json");
+// const metrics_gerais = await d3.json("outputs/metrics_general2.json");
+// const dados = await d3.csv("outputs/data_horm_concat_corr.csv");
 
 // Função para atualizar a visualização com base no ID do indivíduo
 function atualizarVisualizacao(id, tipo) {
