@@ -108,7 +108,7 @@ export async function barras(id) {
             barmode: 'stack',
             width: '450',
             height: '300',
-            title: 'Idade x Tipo de espermatozóide',
+            title: 'Idade x Tipo de espermatozoide',
             xaxis: { title: 'Faixa Etária' },
             yaxis: { title: 'Proporção (%)', tickformat: ',.0%', range: [0, 1]},
             annotations: annotations,

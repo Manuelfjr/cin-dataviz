@@ -104,7 +104,7 @@ export async function barrasDFI(id) {
             barmode: 'stack',
             width: '450',
             height: '300',
-            title: 'DFI x Tipo de espermatozóide',
+            title: 'DFI x Tipo de espermatozoide',
             xaxis: { title: 'Faixa de DFI' },
             yaxis: { title: 'Proporção (%)', tickformat: ',.0%', range: [0, 1] },
             annotations: annotations,

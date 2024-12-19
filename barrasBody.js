@@ -104,7 +104,7 @@ export async function barrasBody(id) {
             barmode: 'stack',
             width: '450',
             height: '300',
-            title: 'IMC x Tipo de espermatozóide',
+            title: 'IMC x Tipo de espermatozoide',
             xaxis: { title: 'Faixa de IMC' },
             yaxis: { title: 'Proporção (%)', tickformat: ',.0%', range: [0, 1] },
             annotations: annotations,
