@@ -1,5 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
+.content {
+    opacity: 0.5;
+    /* Escurece o conteúdo */
+    pointer-events: none;
+    /* Desativa interação com o conteúdo */
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Fundo escuro semitransparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    /* Garante que esteja sobre o conteúdo */
+}
+
+.loading-message {
+    background-color: #fff;
+    color: #000;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
 .explication {
     font-family: 'Roboto', sans-serif;
     color: #333;
@@ -167,16 +198,19 @@ p {
     display: flex;
     gap: 10px;
 }
-#tipo{
+
+#tipo {
     width: 80px;
 }
-#espermatozoides{
+
+#espermatozoides {
     width: 90px;
 }
 
-#individuos{
+#individuos {
     width: 100px;
 }
+
 /* Estilo para o rótulo do dropdown */
 .dropdown select {
     padding: 5px;
@@ -244,6 +278,7 @@ select:focus {
     /* Espaçamento entre as divs */
 
 }
+
 .container4 {
     display: flex;
     flex-direction: column;
@@ -252,37 +287,45 @@ select:focus {
     /* Espaçamento entre as divs */
 
 }
+
 /* Estilo para os glifos com borda */
 .glifos {
     position: relative;
     width: 100%;
     overflow: hidden;
-    height: 600px; /* Certifique-se de que a altura seja consistente */
-     /* Impede elementos de "vazar" */
+    height: 600px;
+    /* Certifique-se de que a altura seja consistente */
+    /* Impede elementos de "vazar" */
 
     border: 1px solid #ddd;
     border-radius: 8px;
 
 }
-.glifos svg{
+
+.glifos svg {
     overflow: visible;
     margin-top: 40px;
 }
 
 
 .glifo_metric {
-    position: relative; /* Necessário para centralização */
-    display: flex;      /* Flexbox ajuda na centralização */
+    position: relative;
+    /* Necessário para centralização */
+    display: flex;
+    /* Flexbox ajuda na centralização */
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 100%; /* Deve preencher seu contêiner pai */
-    overflow: hidden; /* Impede que elementos "vazem" */
+    height: 100%;
+    /* Deve preencher seu contêiner pai */
+    overflow: hidden;
+    /* Impede que elementos "vazem" */
     border: 1px solid #ddd;
     border-radius: 8px;
-    
+
 }
+
 /* Estilo para o elemento video */
 video {
     display: flex;
@@ -309,21 +352,32 @@ video {
     border-radius: 8px;
     overflow: hidden;
 }
+
 .barras {
-    display: flex; /* Ativa o flexbox */
+    display: flex;
+    /* Ativa o flexbox */
     width: 32.5%;
-    flex-direction: row; /* Organiza os elementos lado a lado (horizontal) */
-    justify-content: space-between; /* Adiciona espaço entre as divs */
-    align-items: flex-start; /* Alinha as divs no topo */
-    gap: 20px; /* Espaço entre as divs */
-    
+    flex-direction: row;
+    /* Organiza os elementos lado a lado (horizontal) */
+    justify-content: space-between;
+    /* Adiciona espaço entre as divs */
+    align-items: flex-start;
+    /* Alinha as divs no topo */
+    gap: 20px;
+    /* Espaço entre as divs */
+
     border: 1px solid #ddd;
-    border-radius: 8px; /* Bordas arredondadas */
+    border-radius: 8px;
+    /* Bordas arredondadas */
 }
 
-#barras, #barrasAMH svg{
+#barras,
+#barrasAMH svg {
     width: 90%;
-    height: 300px; /* Define a altura das divs */
-    padding: 0px; /* Espaçamento interno */
-    background-color: #f9f9f900; /* Cor de fundo */
+    height: 300px;
+    /* Define a altura das divs */
+    padding: 0px;
+    /* Espaçamento interno */
+    background-color: #f9f9f900;
+    /* Cor de fundo */
 }

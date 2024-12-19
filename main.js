@@ -29,22 +29,61 @@ function downloadFile(url, filename) {
 async function fetchLargeFileFromGitHub(path, file) {
     const url = `${path}/${file}`;
     try {
+        // Exibe o overlay
+        const overlay = document.getElementById('overlay');
+        overlay.style.display = "flex";
+
+        const progressText = document.getElementById('progress-text');
+        progressText.textContent = "0%";
+
         const response = await fetch(url, {
             headers: {
                 // 'Authorization': `token ${token}`,
                 'Accept': 'application/vnd.github.v3.raw'
             }
         });
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.json();
-        console.log(data);
-        return data;
+
+        const contentLength = response.headers.get("Content-Length");
+        if (!contentLength) {
+            throw new Error("Unable to determine file size.");
+        }
+
+        const totalBytes = parseInt(contentLength, 10);
+        let loadedBytes = 0;
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let chunks = "";
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            loadedBytes += value.length;
+            chunks += decoder.decode(value, { stream: true });
+
+            // Calcula e atualiza a porcentagem
+            const progress = Math.floor((loadedBytes / totalBytes) * 100);
+            progressText.textContent = `${progress}%`;
+        }
+
+        // Oculta o overlay ao finalizar
+        overlay.style.display = "none";
+
+        // Retorna os dados processados
+        return JSON.parse(chunks);
     } catch (error) {
         console.error('Error fetching file:', error);
+
+        // Oculta o overlay em caso de erro
+        document.getElementById('overlay').style.display = "none";
     }
 }
+
 
 const metrics_general = await fetchLargeFileFromGitHub("https://media.githubusercontent.com/media/Manuelfjr/cin-dataviz/develop/outputs", "metrics_general2.json");
 console.log("passou o zero");
